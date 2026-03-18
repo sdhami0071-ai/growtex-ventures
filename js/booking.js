@@ -173,15 +173,18 @@ bookingForm.addEventListener('submit', async function(e) {
 
 /* ═══════════════════════════════════════════════════
    GOOGLE SHEETS INTEGRATION
+   Uses URL-encoded form data (not JSON) because
+   no-cors mode strips application/json content-type.
    ═══════════════════════════════════════════════════ */
 async function submitToGoogleSheets(data) {
-  const response = await fetch(GOOGLE_SHEET_URL, {
+  const formData = new URLSearchParams();
+  Object.keys(data).forEach(key => formData.append(key, data[key]));
+  
+  await fetch(GOOGLE_SHEET_URL, {
     method: 'POST',
-    mode: 'no-cors', // Google Apps Script requires no-cors
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(data)
+    mode: 'no-cors',
+    body: formData
   });
-  return response;
 }
 
 /* ═══════════════════════════════════════════════════
