@@ -220,15 +220,60 @@ function resetBookingForm() {
 }
 
 /* ═══════════════════════════════════════════════════
-   WIRE UP ALL "BOOK A CALL" BUTTONS ACROSS THE SITE
+   WIRE UP ALL BOOKING BUTTONS ACROSS THE SITE
+   Intercepts by text content + CSS classes so it works
+   even if browser caches the old HTML.
    ═══════════════════════════════════════════════════ */
-document.addEventListener('DOMContentLoaded', function() {
-  // Any link with href that includes "tel:" for booking can be replaced
-  // We target specific known booking triggers
-  document.querySelectorAll('a[href="tel:+917999866007"]').forEach(link => {
+(function wireUpBookingButtons() {
+  // Keywords that indicate a booking/agent button
+  const bookingKeywords = ['talk to', 'book a', 'schedule', 'agent'];
+  
+  // CSS selectors for known booking trigger elements
+  const selectorTargets = [
+    '.nav-cta',           // Nav "Talk to an Agent" button
+    '.btn-o',             // Hero outline "Talk to a GrowteX Agent" button
+    'button.bw',          // CTA "Book a Free Call" button
+    'a.bw'                // CTA "Book a Free Call" link (if anchor)
+  ];
+  
+  // 1. Wire up by CSS selectors
+  selectorTargets.forEach(selector => {
+    document.querySelectorAll(selector).forEach(el => {
+      el.addEventListener('click', function(e) {
+        e.preventDefault();
+        openBookingModal();
+      });
+    });
+  });
+  
+  // 2. Wire up tel: links
+  document.querySelectorAll('a[href^="tel:"]').forEach(link => {
     link.addEventListener('click', function(e) {
       e.preventDefault();
       openBookingModal();
     });
   });
-});
+  
+  // 3. Wire up any link/button whose text contains booking keywords
+  //    (but skip WhatsApp links and external links)
+  document.querySelectorAll('a, button').forEach(el => {
+    const text = el.textContent.toLowerCase();
+    const href = el.getAttribute('href') || '';
+    
+    // Skip WhatsApp links, external links, and section anchors
+    if (href.includes('wa.me') || href.includes('whatsapp') || href.startsWith('http')) return;
+    if (el.classList.contains('cfab') || el.classList.contains('qrb')) return; // Skip chatbot
+    if (el.classList.contains('bk-')) return; // Skip booking modal's own buttons
+    
+    const isBookingButton = bookingKeywords.some(kw => text.includes(kw));
+    if (isBookingButton) {
+      el.addEventListener('click', function(e) {
+        e.preventDefault();
+        openBookingModal();
+      });
+    }
+  });
+
+  console.log('✅ GrowteX Booking System loaded — all buttons wired up!');
+})();
+
