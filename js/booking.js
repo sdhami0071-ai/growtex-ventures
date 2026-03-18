@@ -173,17 +173,44 @@ bookingForm.addEventListener('submit', async function(e) {
 
 /* ═══════════════════════════════════════════════════
    GOOGLE SHEETS INTEGRATION
-   Uses URL-encoded form data (not JSON) because
-   no-cors mode strips application/json content-type.
+   Uses a hidden form + iframe to bypass CORS entirely.
+   This is the most reliable method for static sites
+   submitting to Google Apps Script.
    ═══════════════════════════════════════════════════ */
 async function submitToGoogleSheets(data) {
-  const formData = new URLSearchParams();
-  Object.keys(data).forEach(key => formData.append(key, data[key]));
-  
-  await fetch(GOOGLE_SHEET_URL, {
-    method: 'POST',
-    mode: 'no-cors',
-    body: formData
+  return new Promise((resolve) => {
+    // Create hidden iframe to receive the form response
+    let iframe = document.getElementById('gsheet_iframe');
+    if (!iframe) {
+      iframe = document.createElement('iframe');
+      iframe.name = 'gsheet_iframe';
+      iframe.id = 'gsheet_iframe';
+      iframe.style.display = 'none';
+      document.body.appendChild(iframe);
+    }
+    
+    // Create a real HTML form
+    const form = document.createElement('form');
+    form.method = 'POST';
+    form.action = GOOGLE_SHEET_URL;
+    form.target = 'gsheet_iframe'; // Submit into hidden iframe
+    
+    // Add all booking data as hidden inputs
+    Object.keys(data).forEach(key => {
+      const input = document.createElement('input');
+      input.type = 'hidden';
+      input.name = key;
+      input.value = data[key] || '';
+      form.appendChild(input);
+    });
+    
+    // Submit the form
+    document.body.appendChild(form);
+    form.submit();
+    form.remove();
+    
+    // Resolve after a short delay (can't read cross-origin iframe response)
+    setTimeout(resolve, 2000);
   });
 }
 
