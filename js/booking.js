@@ -136,7 +136,7 @@ bookingForm.addEventListener('submit', async function(e) {
   const data = {
     name: document.getElementById('bkName').value.trim(),
     email: document.getElementById('bkEmail').value.trim(),
-    phone: '+91 ' + document.getElementById('bkPhone').value.trim(),
+    phone: '0' + document.getElementById('bkPhone').value.trim(),
     service: document.getElementById('bkService').value,
     date: document.getElementById('bkDate').value,
     time: document.getElementById('bkTime').value,
