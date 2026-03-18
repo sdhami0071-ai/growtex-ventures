@@ -303,9 +303,9 @@
   <h2 id="cta-h" class="fu">STOP LEAVING MONEY<br/>ON THE TABLE.</h2>
   <p class="fu">Your DPIIT certificate. Your tax exemption. Your digital presence. GrowteX gets it all done — while you focus on building your company.</p>
   <div class="cbts fu">
-    <a href="tel:+917999866007" class="bw" aria-label="Book a free call with GrowteX">
-      <div class="dbl-i"><span>📞 Book a Free Call</span><span>📞 We'll Call You Back</span></div>
-    </a>
+    <button class="bw" aria-label="Book a free call with GrowteX" onclick="openBookingModal()">
+      <div class="dbl-i"><span>📞 Book a Free Call</span><span>📞 Schedule Now</span></div>
+    </button>
     <a href="https://wa.me/917999866007" class="bwa" rel="noopener" target="_blank" aria-label="WhatsApp GrowteX on +91 7999866007">
       <div class="dbl-i"><span>💬 WhatsApp Us Now</span><span>💬 +91 7999866007</span></div>
     </a>
@@ -353,6 +353,97 @@
   </div>
 </footer>
 
+<!-- ══ BOOKING MODAL ══ -->
+<div class="bk-overlay" id="bkOverlay" role="dialog" aria-modal="true" aria-label="Book a Discovery Call" aria-hidden="true">
+  <div class="bk-modal">
+    <button class="bk-close" id="bkClose" aria-label="Close booking modal">✕</button>
+    <div class="bk-header">
+      <div class="bk-icon" aria-hidden="true">📞</div>
+      <h3 class="bk-title">Book Your FREE Discovery Call</h3>
+      <p class="bk-subtitle">15-minute call with a GrowteX expert. No obligations. Just clarity on what your business qualifies for.</p>
+    </div>
+    <form id="bookingForm" class="bk-form" novalidate>
+      <div class="bk-row">
+        <div class="bk-field">
+          <label for="bkName">Full Name <span class="bk-req">*</span></label>
+          <input type="text" id="bkName" name="name" placeholder="e.g. Rahul Sharma" required autocomplete="name"/>
+        </div>
+        <div class="bk-field">
+          <label for="bkEmail">Email Address <span class="bk-req">*</span></label>
+          <input type="email" id="bkEmail" name="email" placeholder="you@company.com" required autocomplete="email"/>
+        </div>
+      </div>
+      <div class="bk-row">
+        <div class="bk-field">
+          <label for="bkPhone">WhatsApp Number <span class="bk-req">*</span></label>
+          <div class="bk-phone-wrap">
+            <span class="bk-prefix">+91</span>
+            <input type="tel" id="bkPhone" name="phone" placeholder="7999866007" required pattern="[0-9]{10}" maxlength="10" autocomplete="tel"/>
+          </div>
+        </div>
+        <div class="bk-field">
+          <label for="bkService">Service Interest <span class="bk-req">*</span></label>
+          <select id="bkService" name="service" required>
+            <option value="" disabled selected>Select a service…</option>
+            <option value="DPIIT Certification">DPIIT / Startup India Certificate</option>
+            <option value="80IAC Tax Exemption">80IAC Tax Exemption</option>
+            <option value="Website Development">Website Development</option>
+            <option value="Paid Advertising">Paid Advertising (Meta/Google)</option>
+            <option value="Social Media Management">Social Media Management</option>
+            <option value="Branding & Logo Design">Branding & Logo Design</option>
+            <option value="UI/UX Design">UI/UX Design</option>
+            <option value="Full Growth Package">Full Growth Package</option>
+            <option value="Other">Other / Not Sure</option>
+          </select>
+        </div>
+      </div>
+      <div class="bk-row">
+        <div class="bk-field">
+          <label for="bkDate">Preferred Date <span class="bk-req">*</span></label>
+          <input type="date" id="bkDate" name="date" required/>
+        </div>
+        <div class="bk-field">
+          <label for="bkTime">Preferred Time (IST) <span class="bk-req">*</span></label>
+          <select id="bkTime" name="time" required>
+            <option value="" disabled selected>Select a slot…</option>
+            <option value="09:00 AM">09:00 AM</option>
+            <option value="10:00 AM">10:00 AM</option>
+            <option value="11:00 AM">11:00 AM</option>
+            <option value="12:00 PM">12:00 PM</option>
+            <option value="01:00 PM">01:00 PM</option>
+            <option value="02:00 PM">02:00 PM</option>
+            <option value="03:00 PM">03:00 PM</option>
+            <option value="04:00 PM">04:00 PM</option>
+            <option value="05:00 PM">05:00 PM</option>
+            <option value="06:00 PM">06:00 PM</option>
+          </select>
+        </div>
+      </div>
+      <div class="bk-field">
+        <label for="bkMessage">Anything else? <span class="bk-opt">(optional)</span></label>
+        <textarea id="bkMessage" name="message" rows="3" placeholder="Tell us briefly about your business or question…"></textarea>
+      </div>
+      <button type="submit" class="bk-submit" id="bkSubmit">
+        <span class="bk-submit-text">Confirm Booking →</span>
+        <span class="bk-submit-loading" style="display:none;">
+          <span class="bk-spinner"></span> Booking…
+        </span>
+      </button>
+      <p class="bk-footer-note">🔒 Your data is safe. We never share it with third parties.</p>
+    </form>
+    <!-- Success State -->
+    <div class="bk-success" id="bkSuccess" style="display:none;">
+      <div class="bk-success-icon">✅</div>
+      <h3>You're Booked!</h3>
+      <p>A GrowteX agent will WhatsApp you at <strong id="bkConfirmPhone"></strong> within 30 minutes to confirm your <strong id="bkConfirmDate"></strong> slot.</p>
+      <div class="bk-success-actions">
+        <a href="https://wa.me/917999866007" class="bk-wa-btn" target="_blank" rel="noopener">💬 WhatsApp Us Directly</a>
+        <button class="bk-another" onclick="resetBookingForm()">Book Another Call</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- ══ CHATBOT FAB ══ -->
 <button class="cfab" id="cfab" aria-label="Chat with GrowteX Agent" aria-expanded="false" style="position:fixed;">
   <div class="fbadge2" aria-hidden="true"></div>
@@ -387,6 +478,7 @@
 
 <!-- ══ SCRIPTS ══ -->
 <script src="js/script.js"></script>
+<script src="js/booking.js"></script>
 
 </body>
 </html>
