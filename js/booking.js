@@ -173,44 +173,33 @@ bookingForm.addEventListener('submit', async function(e) {
 
 /* ═══════════════════════════════════════════════════
    GOOGLE SHEETS INTEGRATION
-   Uses a hidden form + iframe to bypass CORS entirely.
-   This is the most reliable method for static sites
-   submitting to Google Apps Script.
+   Uses Image beacon + doGet approach (same technique
+   used by Google Analytics). Sends data as URL query
+   parameters which bypasses all CORS/redirect issues.
    ═══════════════════════════════════════════════════ */
 async function submitToGoogleSheets(data) {
   return new Promise((resolve) => {
-    // Create hidden iframe to receive the form response
-    let iframe = document.getElementById('gsheet_iframe');
-    if (!iframe) {
-      iframe = document.createElement('iframe');
-      iframe.name = 'gsheet_iframe';
-      iframe.id = 'gsheet_iframe';
-      iframe.style.display = 'none';
-      document.body.appendChild(iframe);
-    }
+    const params = new URLSearchParams(data).toString();
+    const url = GOOGLE_SHEET_URL + '?' + params;
     
-    // Create a real HTML form
-    const form = document.createElement('form');
-    form.method = 'POST';
-    form.action = GOOGLE_SHEET_URL;
-    form.target = 'gsheet_iframe'; // Submit into hidden iframe
+    // Method 1: Image beacon (most reliable cross-origin)
+    const img = new Image();
+    let resolved = false;
     
-    // Add all booking data as hidden inputs
-    Object.keys(data).forEach(key => {
-      const input = document.createElement('input');
-      input.type = 'hidden';
-      input.name = key;
-      input.value = data[key] || '';
-      form.appendChild(input);
-    });
+    const done = () => {
+      if (!resolved) {
+        resolved = true;
+        console.log('✅ Booking data sent to Google Sheets');
+        resolve();
+      }
+    };
     
-    // Submit the form
-    document.body.appendChild(form);
-    form.submit();
-    form.remove();
+    img.onload = done;
+    img.onerror = done; // onerror still fires AFTER the request completes
+    img.src = url;
     
-    // Resolve after a short delay (can't read cross-origin iframe response)
-    setTimeout(resolve, 2000);
+    // Fallback timeout
+    setTimeout(done, 4000);
   });
 }
 
