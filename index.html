@@ -24,14 +24,16 @@
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://growtex.in/#organization","name":"GrowteX Ventures","url":"https://growtex.in","description":"India's most execution-focused startup consultancy.","telephone":"+917999866007","address":{"@type":"PostalAddress","addressCountry":"IN"},"sameAs":["https://instagram.com/growtex.in"]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is DPIIT certification?","acceptedAnswer":{"@type":"Answer","text":"DPIIT recognition classifies your company as an official Indian startup, unlocking ₹50L+ funding, 18+ schemes, and IPR waivers."}},{"@type":"Question","name":"What is 80IAC tax exemption?","acceptedAnswer":{"@type":"Answer","text":"Section 80IAC gives DPIIT-recognised startups 100% income tax holiday for 3 consecutive years out of their first 10."}},{"@type":"Question","name":"How long does DPIIT filing take?","acceptedAnswer":{"@type":"Answer","text":"GrowteX completes DPIIT filing in 72 hours with a 90%+ approval rate."}}]}]}</script>
 
 <!-- ══ FONTS ══ -->
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
 
 <!-- ══ STYLES ══ -->
 <link rel="stylesheet" href="css/style.css"/>
 
 </head>
-<body>
+<body style="cursor: none;">
 
+<div id="progress-bar" style="position: fixed; top: 0; left: 0; width: 0%; height: 2px; background: linear-gradient(90deg, #10B981, #F5C842); z-index: 10000;"></div>
+<div class="noise-overlay" aria-hidden="true"></div>
 <div class="cur" id="cur"></div>
 <div class="cur-ring" id="cur-ring"></div>
 
@@ -54,52 +56,68 @@
 
 <!-- HERO -->
 <main>
-<section id="hero" aria-labelledby="hero-h">
-  <div class="grid-bg" aria-hidden="true"></div>
-  <div class="orb orb1" aria-hidden="true"></div>
-  <div class="orb orb2" aria-hidden="true"></div>
-  <div class="eyebrow" aria-label="Company positioning">India's Startup Growth Partner</div>
-  <h1 class="headline" id="hero-h">
-    <span class="ww"><span class="wrd" style="animation-delay:.35s">Most</span></span>&nbsp;<span class="ww"><span class="wrd" style="animation-delay:.43s">Founders</span></span><br/>
-    <span class="ww"><span class="wrd" style="animation-delay:.51s">Leave</span></span>&nbsp;<span class="ww"><span class="wrd go" style="animation-delay:.59s">₹50&nbsp;Lakhs</span></span><br/>
-    <span class="ww"><span class="wrd ac" style="animation-delay:.67s">On&nbsp;The&nbsp;Table.</span></span>
-  </h1>
-  <p class="hero-sub">You built a business. You qualify for government funding, 3-year tax holidays, and digital domination. GrowteX gets you all three — while you focus on building.</p>
-  <div class="stats" role="region" aria-label="Key statistics">
-    <div class="stat"><span class="stat-n" data-count="500" data-suffix="+">500+</span><span class="stat-l">Startups Certified</span></div>
-    <div class="stat"><span class="stat-n">₹50L</span><span class="stat-l">Max DPIIT Funding</span></div>
-    <div class="stat"><span class="stat-n">3YRS</span><span class="stat-l">Tax Holiday Available</span></div>
-    <div class="stat"><span class="stat-n">72H</span><span class="stat-l">Avg. Filing Time</span></div>
+<section id="hero" aria-labelledby="hero-h" style="position: relative; overflow: hidden; display: flex; align-items: center; min-height: 100vh;">
+  <canvas id="hero-canvas" style="position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; mix-blend-mode: screen;"></canvas>
+  <div class="orb-container" aria-hidden="true">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
   </div>
-  <div class="btns">
-    <a href="booking.html?type=demo" class="btn-p" aria-label="Book a Demo">
-      <div class="dbl-i"><span>📊 Book a Demo →</span><span>Schedule Now →</span></div>
-    </a>
-    <a href="booking.html?type=agent" class="btn-o" aria-label="Talk to an Agent">💬 Talk to an Agent Right Now</a>
+  
+  <div class="container">
+    <div class="eyebrow mono-tag" aria-label="Company positioning" style="color: var(--growth-bright); border-color: var(--border-default); background: var(--surface-2);">ORIGIN_STORY.sh // v2.0</div>
+    <h1 class="headline" id="hero-h">
+      <span class="ac">Most Founders</span><br/>
+      Leave <span class="go">₹50 Lakhs</span><br/>
+      On The Table.
+    </h1>
+    <p class="hero-sub" style="color: var(--text-secondary); margin-bottom: 40px;">You built a business. You qualify for government funding, 3-year tax holidays, and digital domination. GrowteX gets you all three — while you focus on building.</p>
+    
+    <div class="stats" role="region" aria-label="Key statistics">
+      <div class="stat">
+        <span class="stat-label mono-tag">STARTUPS_HELPED</span>
+        <span class="stat-n" data-count="500" data-suffix="+">500+</span>
+      </div>
+      <div class="stat">
+        <span class="stat-label mono-tag">MAX_FUNDING</span>
+        <span class="stat-n">₹50L</span>
+      </div>
+      <div class="stat">
+        <span class="stat-label mono-tag">TAX_HOLIDAY</span>
+        <span class="stat-n">3YRS</span>
+      </div>
+      <div class="stat">
+        <span class="stat-label mono-tag">AVG_FILING</span>
+        <span class="stat-n">72H</span>
+      </div>
+    </div>
+    
+    <div class="btns">
+      <a href="booking.html?type=demo" class="btn-p cta-primary" aria-label="Book a Demo">
+        <div class="dbl-i"><span>📊 Book a Demo →</span><span>Schedule Now →</span></div>
+      </a>
+      <a href="booking.html?type=agent" class="btn-o cta-primary" aria-label="Talk to an Agent">💬 Talk to an Agent Right Now</a>
+    </div>
   </div>
 </section>
 </main>
 
 <!-- PAIN MARQUEE -->
-<div id="pain" aria-hidden="true" role="presentation">
+<div id="pain" aria-hidden="true" role="presentation" class="ticker-wrapper" style="background: var(--venture-gold); padding: 16px 0;">
   <div class="mq-track">
-    <div class="pi">Missed government grants</div>
-    <div class="pi">Zero online presence</div>
-    <div class="pi">Paying taxes you don't owe</div>
-    <div class="pi">Ads burning cash</div>
-    <div class="pi">No brand authority</div>
-    <div class="pi">Invisible on social media</div>
-    <div class="pi">No DPIIT recognition</div>
-    <div class="pi">Losing customers to competitors</div>
+    <div class="pi" style="color: var(--surface-0) !important;">Missed government grants</div>
+    <div class="pi" style="color: var(--surface-0) !important;">Zero online presence</div>
+    <div class="pi" style="color: var(--surface-0) !important;">Paying taxes you don't owe</div>
+    <div class="pi" style="color: var(--surface-0) !important;">Ads burning cash</div>
+    <div class="pi" style="color: var(--surface-0) !important;">No brand authority</div>
+    <div class="pi" style="color: var(--surface-0) !important;">Invisible on social media</div>
+    <div class="pi" style="color: var(--surface-0) !important;">No DPIIT recognition</div>
+    <div class="pi" style="color: var(--surface-0) !important;">Losing customers to competitors</div>
     <!-- duplicate for seamless loop -->
-    <div class="pi">Missed government grants</div>
-    <div class="pi">Zero online presence</div>
-    <div class="pi">Paying taxes you don't owe</div>
-    <div class="pi">Ads burning cash</div>
-    <div class="pi">No brand authority</div>
-    <div class="pi">Invisible on social media</div>
-    <div class="pi">No DPIIT recognition</div>
-    <div class="pi">Losing customers to competitors</div>
+    <div class="pi" style="color: var(--surface-0) !important;">Missed government grants</div>
+    <div class="pi" style="color: var(--surface-0) !important;">Zero online presence</div>
+    <div class="pi" style="color: var(--surface-0) !important;">Paying taxes you don't owe</div>
+    <div class="pi" style="color: var(--surface-0) !important;">Ads burning cash</div>
   </div>
 </div>
 
@@ -150,98 +168,92 @@
 <div class="divider"></div>
 
 <!-- MARQUEE STRIP 2 -->
-<div class="mq-wrap2" aria-hidden="true" role="presentation">
+<div class="mq-wrap2 ticker-wrapper" aria-hidden="true" role="presentation" style="background: var(--surface-1); border: none;">
   <div class="mq-track2">
-    <div class="mq-item2"><span class="mq-dot2"></span>DPIIT CERTIFICATION</div>
-    <div class="mq-item2"><span class="mq-dot2"></span>80IAC TAX EXEMPTION</div>
-    <div class="mq-item2"><span class="mq-dot2"></span>WEBSITE DEVELOPMENT</div>
-    <div class="mq-item2"><span class="mq-dot2"></span>PAID ADVERTISING</div>
-    <div class="mq-item2"><span class="mq-dot2"></span>SOCIAL MEDIA MANAGEMENT</div>
-    <div class="mq-item2"><span class="mq-dot2"></span>BRANDING &amp; LOGO DESIGN</div>
-    <div class="mq-item2"><span class="mq-dot2"></span>500+ STARTUPS HELPED</div>
-    <div class="mq-item2"><span class="mq-dot2"></span>90% APPROVAL RATE</div>
-    <div class="mq-item2"><span class="mq-dot2"></span>72H FILING TIME</div>
-    <div class="mq-item2"><span class="mq-dot2"></span>WHERE SERIOUS FOUNDERS BUILD SERIOUS COMPANIES</div>
-    <div class="mq-item2"><span class="mq-dot2"></span>DPIIT CERTIFICATION</div>
-    <div class="mq-item2"><span class="mq-dot2"></span>80IAC TAX EXEMPTION</div>
-    <div class="mq-item2"><span class="mq-dot2"></span>WEBSITE DEVELOPMENT</div>
-    <div class="mq-item2"><span class="mq-dot2"></span>PAID ADVERTISING</div>
-    <div class="mq-item2"><span class="mq-dot2"></span>SOCIAL MEDIA MANAGEMENT</div>
-    <div class="mq-item2"><span class="mq-dot2"></span>BRANDING &amp; LOGO DESIGN</div>
-    <div class="mq-item2"><span class="mq-dot2"></span>500+ STARTUPS HELPED</div>
-    <div class="mq-item2"><span class="mq-dot2"></span>90% APPROVAL RATE</div>
-    <div class="mq-item2"><span class="mq-dot2"></span>72H FILING TIME</div>
-    <div class="mq-item2"><span class="mq-dot2"></span>WHERE SERIOUS FOUNDERS BUILD SERIOUS COMPANIES</div>
+    <div class="mq-item2 mono-tag"><span class="mq-dot2"></span>DPIIT CERTIFICATION</div>
+    <div class="mq-item2 mono-tag"><span class="mq-dot2"></span>80IAC TAX EXEMPTION</div>
+    <div class="mq-item2 mono-tag"><span class="mq-dot2"></span>WEBSITE DEVELOPMENT</div>
+    <div class="mq-item2 mono-tag"><span class="mq-dot2"></span>PAID ADVERTISING</div>
+    <div class="mq-item2 mono-tag"><span class="mq-dot2"></span>SOCIAL MEDIA MANAGEMENT</div>
+    <div class="mq-item2 mono-tag"><span class="mq-dot2"></span>500+ STARTUPS HELPED</div>
+    <div class="mq-item2 mono-tag"><span class="mq-dot2"></span>90% APPROVAL RATE</div>
+    <div class="mq-item2 mono-tag"><span class="mq-dot2"></span>72H FILING TIME</div>
+    <!-- Duplicates -->
+    <div class="mq-item2 mono-tag"><span class="mq-dot2"></span>DPIIT CERTIFICATION</div>
+    <div class="mq-item2 mono-tag"><span class="mq-dot2"></span>80IAC TAX EXEMPTION</div>
+    <div class="mq-item2 mono-tag"><span class="mq-dot2"></span>WEBSITE DEVELOPMENT</div>
   </div>
 </div>
 
 <!-- THE MILLION DOLLAR ROADMAP (Hormozi Style) -->
-<section id="roadmap" class="roadmap-section">
-  <div class="roadmap-header">
-    <div class="stag fu">The Digital Growth Roadmap</div>
-    <h2 class="st fu">STOP GUESSING.<br/><span style="color:var(--goldb);">START DEPLOYING.</span></h2>
-    <p class="sdesc fu">If you don't have a repeatable system to turn clicks into deposits, you have a hobby, not a business. GrowteX builds the digital infrastructure that turns your 'maybe' into 'inevitable'.</p>
-  </div>
+<section id="roadmap" class="roadmap-section" style="background:var(--surface-0);">
+  <div class="container">
+    <div class="roadmap-header">
+      <div class="stag fu mono-tag">EXECUTION_ENGINE.sh</div>
+      <h2 class="st fu">STOP GUESSING.<br/><span style="color:var(--venture-gold);">START DEPLOYING.</span></h2>
+      <p class="sdesc fu">If you don't have a repeatable system to turn clicks into deposits, you have a hobby, not a business. GrowteX builds the digital infrastructure that turns your 'maybe' into 'inevitable'.</p>
+    </div>
 
-  <div class="roadmap-container fu">
-    <div class="roadmap-path"></div>
-    
-    <div class="roadmap-item" data-step="1">
-      <div class="roadmap-icon">🏗️</div>
-      <div class="roadmap-content">
-        <span class="step-label">Phase 01 — Infrastructure</span>
-        <h3>Build The Machine</h3>
-        <p>Your current website is a brochure. We build a **revenue machine**. Optimized for speed, authority, and high-stakes conversion. If it doesn't sell, it doesn't stay.</p>
-        <ul class="roadmap-stats">
-          <li><strong>100%</strong> Customs code</li>
-          <li><strong>< 2s</strong> Load Time</li>
-        </ul>
+    <div class="roadmap-container fu">
+      <div class="roadmap-path" style="background: linear-gradient(90deg, var(--venture-gold), var(--growth-bright)); opacity: 0.1;"></div>
+      
+      <div class="roadmap-item" data-step="1">
+        <div class="roadmap-icon" data-lottie="infrastructure">🏗️</div>
+        <div class="roadmap-content">
+          <span class="step-label mono-tag" style="color: var(--venture-gold);">Phase 01 // Infrastructure</span>
+          <h3>Build The Machine</h3>
+          <p style="color: var(--text-secondary);">Your current website is a brochure. We build a **revenue machine**. Optimized for speed, authority, and high-stakes conversion.</p>
+          <ul class="roadmap-stats mono-tag" style="border-color: var(--border-default);">
+            <li><strong>100%</strong> CUSTOM_CODE</li>
+            <li><strong>< 2s</strong> LOAD_TIME</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="roadmap-item" data-step="2">
+        <div class="roadmap-icon" data-lottie="attention">📢</div>
+        <div class="roadmap-content">
+          <span class="step-label mono-tag" style="color: var(--venture-gold);">Phase 02 // Attention</span>
+          <h3>Buy the Market</h3>
+          <p style="color: var(--text-secondary);">Organic posting is for amateurs. We **buy targeted attention** from Meta and Google to place your offer directly in front of buyers.</p>
+          <ul class="roadmap-stats mono-tag" style="border-color: var(--border-default);">
+            <li><strong>3-5x</strong> TARGET_ROAS</li>
+            <li><strong>AI</strong> OPTIMIZATION</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="roadmap-item" data-step="3">
+        <div class="roadmap-icon" data-lottie="filtering">🎯</div>
+        <div class="roadmap-content">
+          <span class="step-label mono-tag" style="color: var(--venture-gold);">Phase 03 // Filtering</span>
+          <h3>Kill the Noise</h3>
+          <p style="color: var(--text-secondary);">Clicks mean nothing. **Cash does.** Our funnels filter out the tire-kickers and only deliver 'Dream Clients' to your inbox.</p>
+          <ul class="roadmap-stats mono-tag" style="border-color: var(--border-default);">
+            <li><strong>80%</strong> QUALITY_LIFT</li>
+            <li><strong>24/7</strong> AUTO_NURTURING</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="roadmap-item" data-step="4">
+        <div class="roadmap-icon" data-lottie="domination">🚀</div>
+        <div class="roadmap-content">
+          <span class="step-label mono-tag" style="color: var(--venture-gold);">Phase 04 // Domination</span>
+          <h3>Turn the Crank</h3>
+          <p style="color: var(--text-secondary);">Once the math checks out, we **scale the volume**. No more 'gut feeling' marketing. We deploy capital based on data.</p>
+          <ul class="roadmap-stats mono-tag" style="border-color: var(--border-default);">
+            <li><strong>0%</strong> GUESSWORK</li>
+            <li><strong>PREDICTABLE</strong> GROWTH</li>
+          </ul>
+        </div>
       </div>
     </div>
 
-    <div class="roadmap-item" data-step="2">
-      <div class="roadmap-icon">📢</div>
-      <div class="roadmap-content">
-        <span class="step-label">Phase 02 — Attention</span>
-        <h3>Buy the Market</h3>
-        <p>Organic posting is for amateurs. We **buy targeted attention** from Meta and Google to place your offer directly in front of the people already looking to pay for it.</p>
-        <ul class="roadmap-stats">
-          <li><strong>3-5x</strong> Target ROAS</li>
-          <li><strong>AI</strong> Ad Optimization</li>
-        </ul>
-      </div>
+    <div class="roadmap-cta fu" style="background: var(--surface-1); border-color: var(--border-default);">
+      <p style="font-family: 'Syne', sans-serif; color: var(--text-primary);">"The cost of inaction is the life you didn't live because you were too afraid to build a system."</p>
+      <a href="booking.html" class="btn-p cta-primary" style="background: var(--venture-gold); color: var(--surface-0);">Build Your System Now →</a>
     </div>
-
-    <div class="roadmap-item" data-step="3">
-      <div class="roadmap-icon">🎯</div>
-      <div class="roadmap-content">
-        <span class="step-label">Phase 03 — Filtering</span>
-        <h3>Kill the Noise</h3>
-        <p>Clicks mean nothing. **Cash does.** Our funnels filter out the tire-kickers and only deliver 'Dream Clients' to your inbox. Automated qualification at scale.</p>
-        <ul class="roadmap-stats">
-          <li><strong>80%</strong> Lead Quality Lift</li>
-          <li><strong>24/7</strong> Auto-Nurturing</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="roadmap-item" data-step="4">
-      <div class="roadmap-icon">🚀</div>
-      <div class="roadmap-content">
-        <span class="step-label">Phase 04 — Domination</span>
-        <h3>Turn the Crank</h3>
-        <p>Once the math checks out, we **scale the volume**. No more 'gut feeling' marketing. We deploy capital based on data-backed certainty. You just add zeros.</p>
-        <ul class="roadmap-stats">
-          <li><strong>0%</strong> Guesswork</li>
-          <li><strong>Predictable</strong> Growth</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-  <div class="roadmap-cta fu">
-    <p>"The cost of inaction is the life you didn't live because you were too afraid to build a system."</p>
-    <a href="booking.html" class="btn-p">Build Your System Now →</a>
   </div>
 </section>
 
@@ -285,257 +297,446 @@
       <span class="snum" aria-hidden="true">03</span>
       <div class="tl">Branding and UI/UX Design</div>
       <h3>Look Like a ₹10Cr Company. Even Before You Are.</h3>
-      <p>Your brand is the first thing investors, customers, and partners judge you on. GrowteX builds brand identities that command authority — logo systems, design language, and visual assets that say "serious company" at first glance.</p>
-      <ul class="blist" role="list">
-        <li>Full logo system with brand usage guidelines</li>
-        <li>Color, typography, and brand voice kit</li>
-        <li>Pitch deck and investor presentation design</li>
-        <li>Social media visual identity system</li>
-      </ul>
-      <a href="https://wa.me/917999866007" class="bc oc" rel="noopener" target="_blank">Talk to a GrowteX Agent →</a>
-    </article>
+<!-- DIGITAL SERVICES -->
+<section id="digital" style="background:var(--surface-0);" aria-labelledby="digital-h">
+  <div class="container">
+    <div class="stag fu mono-tag">DIGITAL_DOMINATION.sh</div>
+    <h2 class="st fu" id="digital-h">YOUR WEBSITE IS YOUR<br/><span style="color:var(--growth-bright)">BEST SALESPERSON.</span></h2>
+    <p class="sdesc fu">Works 24/7. Never asks for a raise. Closes deals while you sleep. The question isn't whether you need one — it's why yours isn't doing its job yet.</p>
+    <div class="grid3">
+      <article class="uv-card fu">
+        <span class="snum" aria-hidden="true">01</span>
+        <div class="tl mono-tag">WEBSITE_DEVELOPMENT</div>
+        <h3>A Website That Sells — Not Just Exists</h3>
+        <p style="color: var(--text-secondary);">97% of business websites are glorified brochures. GrowteX builds conversion-optimized machines that turn visitors into leads. Built for speed and authority.</p>
+        <ul class="blist" role="list">
+          <li>Custom UI/UX design — zero templates</li>
+          <li>Conversion-focused landing pages</li>
+          <li>SEO-ready architecture and performance</li>
+        </ul>
+        <a href="https://wa.me/917999866007" class="bc oc mono-tag cta-primary" rel="noopener" target="_blank" style="margin-top: 20px; border: 1px solid var(--growth-bright); color: var(--growth-bright);">TALK_TO_AGENT →</a>
+      </article>
+      
+      <article class="uv-card fu">
+        <span class="snum" aria-hidden="true">02</span>
+        <div class="tl mono-tag">PAID_ADVERTISING</div>
+        <h3>Stop Burning Ad Budget. Start Buying ROI.</h3>
+        <p style="color: var(--text-secondary);">Average businesses waste 60% of ad spend. GrowteX runs data-driven campaigns across Meta, Google, and AI networks — ROAS you can actually verify.</p>
+        <div class="adtags" aria-label="Ad platforms">
+          <span class="at mono-tag">META_ADS</span>
+          <span class="at mono-tag">GOOGLE_SEM</span>
+          <span class="at mono-tag">AI_NETWORKS</span>
+        </div>
+        <a href="https://wa.me/917999866007" class="bc oc mono-tag cta-primary" rel="noopener" target="_blank" style="margin-top: 20px; border: 1px solid var(--growth-bright); color: var(--growth-bright);">TALK_TO_AGENT →</a>
+      </article>
+      
+      <article class="uv-card fu">
+        <span class="snum" aria-hidden="true">03</span>
+        <div class="tl mono-tag">BRAND_AUTHORITY</div>
+        <h3>Command Respect. Command Your Market.</h3>
+        <p style="color: var(--text-secondary);">Your brand is the first thing investors judge you on. GrowteX builds identities that say "serious company" at first glance. Design that scales with your ambition.</p>
+        <ul class="blist" role="list">
+          <li>Full logo systems & guidelines</li>
+          <li>Investor pitch deck design</li>
+          <li>Visual identity systems</li>
+        </ul>
+        <a href="https://wa.me/917999866007" class="bc oc mono-tag cta-primary" rel="noopener" target="_blank" style="margin-top: 20px; border: 1px solid var(--growth-bright); color: var(--growth-bright);">TALK_TO_AGENT →</a>
+      </article>
+    </div>
   </div>
 </section>
 
-<div class="divider"></div>
-
 <!-- SOCIAL MEDIA -->
-<section id="social" style="background:var(--bg3);" aria-labelledby="social-h">
-  <div class="slayout">
-    <div>
-      <div class="stag fu">Social Media Management</div>
-      <h2 class="st fu" id="social-h">YOUR COMPETITORS<br/>ARE POSTING DAILY.<br/><span style="color:var(--bright)">YOU'RE NOT.</span></h2>
-      <p class="sdesc fu">Attention is the new currency. While you run your business, competitors are capturing your future customers on Instagram, LinkedIn, and WhatsApp. GrowteX owns your social presence — completely.</p>
-      <div class="splats fu" role="list" aria-label="Supported social platforms">
-        <div class="prow" role="listitem"><div class="picon" aria-hidden="true">📸</div>Instagram — Reels, Carousels and Stories that drive leads</div>
-        <div class="prow" role="listitem"><div class="picon" aria-hidden="true">👥</div>Facebook — Community building and targeted reach</div>
-        <div class="prow" role="listitem"><div class="picon" aria-hidden="true">💬</div>WhatsApp Business — Automated lead nurturing at scale</div>
-        <div class="prow" role="listitem"><div class="picon" aria-hidden="true">💼</div>LinkedIn — B2B authority and investor-facing presence</div>
+<section id="social" style="background:var(--surface-1);" aria-labelledby="social-h">
+  <div class="container">
+    <div class="slayout">
+      <div>
+        <div class="stag fu mono-tag">SOCIAL_COMMAND.exe</div>
+        <h2 class="st fu" id="social-h">YOUR COMPETITORS<br/>ARE POSTING DAILY.<br/><span style="color:var(--venture-gold)">YOU'RE NOT.</span></h2>
+        <p class="sdesc fu" style="margin-bottom: 30px;">Attention is the new currency. While you run your business, competitors are capturing your future customers on Instagram and LinkedIn. GrowteX owns your presence.</p>
+        <div class="splats fu" role="list">
+          <div class="prow" role="listitem" style="border-radius: 8px;"><div class="picon" aria-hidden="true">📸</div>Instagram — Reels that drive leads</div>
+          <div class="prow" role="listitem" style="border-radius: 8px;"><div class="picon" aria-hidden="true">💼</div>LinkedIn — B2B Investor authority</div>
+          <div class="prow" role="listitem" style="border-radius: 8px;"><div class="picon" aria-hidden="true">💬</div>WhatsApp — Automated nurturing</div>
+        </div>
+        <a href="https://wa.me/917999866007" class="bc g fu cta-primary" rel="noopener" target="_blank" style="background: var(--venture-gold); color: var(--surface-0); margin-top: 30px;">
+          <div class="dbl-i"><span>Talk to a GrowteX Agent →</span><span>WhatsApp Now →</span></div>
+        </a>
       </div>
-      <a href="https://wa.me/917999866007" class="bc g fu" rel="noopener" target="_blank">
-        <div class="dbl-i"><span>Talk to a GrowteX Agent →</span><span>WhatsApp Now →</span></div>
-      </a>
+      <div class="fu">
+        <div class="uv-card">
+          <h3 style="color: var(--venture-gold);">The GrowteX Social Promise</h3>
+          <p style="color: var(--text-secondary); font-size: 14px; line-height: 1.6;">We don't post for vanity metrics. Every piece of content is engineered to build trust, generate leads, and position you as the authority. Content that makes your audience stop scrolling.</p>
+        </div>
+        <div class="mrow" style="margin-top: 16px;">
+          <div class="uv-card" style="padding: 20px;"><div class="n mono-tag" data-count="4" data-suffix="X" style="font-size: 32px; color: var(--venture-gold);">4X</div><div class="l mono-tag">ENG_LIFT</div></div>
+          <div class="uv-card" style="padding: 20px;"><div class="n mono-tag" data-count="30" data-suffix="+" style="font-size: 32px; color: var(--venture-gold);">30+</div><div class="l mono-tag">ASSETS/MO</div></div>
+        </div>
+      </div>
     </div>
-    <div class="fu">
-      <div class="promise">
-        <h3>The GrowteX Social Promise</h3>
-        <p>We don't post for vanity metrics. Every piece of content is engineered to build trust, generate leads, and position you as the authority in your niche. No generic content mills. No recycled templates. Content that makes your audience stop scrolling and take action.</p>
+  </div>
+</section>
+
+<!-- NEW SECTION: EXECUTION ENGINE (ROADMAP) -->
+<section id="roadmap" style="background: var(--surface-1); padding: 120px 0;">
+  <div class="container">
+    <div class="mono-tag fu" style="margin-bottom: 24px;">EXECUTION_ENGINE_MAP.v2</div>
+    <h2 class="fu" style="font-size: 3.5rem; margin-bottom: 80px;">THE PATH TO <span style="color: var(--growth-bright);">DOMINANCE.</span></h2>
+    
+    <div class="roadmap-grid" style="position: relative; padding-left: 40px;">
+      <div id="roadmap-line" style="position: absolute; left: 10px; top: 0; bottom: 0; width: 2px; background: rgba(255,255,255,0.05);">
+        <div id="roadmap-progress" style="width: 100%; height: 0%; background: var(--growth-bright); box-shadow: 0 0 20px var(--growth-bright);"></div>
       </div>
-      <div class="mrow">
-        <div class="mb"><div class="n" data-count="4" data-suffix="X">4X</div><div class="l">Avg. Engagement Lift</div></div>
-        <div class="mb"><div class="n" data-count="30" data-suffix="+">30+</div><div class="l">Posts Per Month</div></div>
-        <div class="mb"><div class="n">100%</div><div class="l">Brand Voice Consistent</div></div>
-        <div class="mb"><div class="n">0</div><div class="l">Hours of Your Time</div></div>
+      
+      <div class="roadmap-step uv-card fu" style="margin-bottom: 60px;">
+        <div class="mono-tag" style="color: var(--growth-bright); margin-bottom: 15px;">STEP_01 // INTAKE</div>
+        <h3 style="font-size: 1.5rem; margin-bottom: 10px;">Immediate Eligibility Scan</h3>
+        <p style="color: var(--text-secondary);">24 hours from first contact. We confirm your DIPP status and tax holiday potential. If you don't qualify, we tell you immediately of why.</p>
       </div>
+      
+      <div class="roadmap-step uv-card fu" style="margin-bottom: 60px;">
+        <div class="mono-tag" style="color: var(--venture-gold); margin-bottom: 15px;">STEP_02 // DEPLOYMENT</div>
+        <h3 style="font-size: 1.5rem; margin-bottom: 10px;">Asset Construction</h3>
+        <p style="color: var(--text-secondary);">We build your conversion-optimized engine. Website, brand assets, and social profiles. Built for authority, not just aesthetics.</p>
+      </div>
+      
+      <div class="roadmap-step uv-card fu">
+        <div class="mono-tag" style="color: var(--growth-bright); margin-bottom: 15px;">STEP_03 // SCALE</div>
+        <h3 style="font-size: 1.5rem; margin-bottom: 10px;">Revenue Extraction</h3>
+        <p style="color: var(--text-secondary);">Ads live. Social posting active. Exemption filed. We monitor your growth 24/7, adjusting the engine for peak ROI.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ORIGIN STORY -->
+<section id="origin" style="background: var(--surface-0); padding: 120px 0;">
+  <div class="container" style="max-width: 800px; text-align: center;">
+    <div class="mono-tag fu" style="margin-bottom: 24px;">ORIGIN_STORY.md</div>
+    <h2 class="st fu" style="font-size: clamp(2.5rem, 6vw, 4rem); line-height: 1.1;">"Every month without DPIIT is a month of funding <span style="color: var(--venture-gold);">left unclaimed.</span>"</h2>
+    <p class="fu" style="font-size: 1.2rem; color: var(--text-secondary); font-style: italic; margin: 40px 0;">GrowteX was built by founders who missed the deadlines, paid the taxes we didn't owe, and saw the market move faster than our CAs. We built the firm we wished we had.</p>
+    <div class="fu" style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+      <div style="width: 48px; height: 1px; background: var(--venture-gold);"></div>
+      <span class="mono-tag">Sumit · Founder, GrowteX Ventures</span>
     </div>
   </div>
 </section>
 
 <!-- TAX EXEMPTION -->
-<section id="tax" style="background:var(--bg);border-top:1px solid var(--border);" aria-labelledby="tax-h">
-  <div class="tlayout">
-    <div>
-      <div class="stag fu">80IAC Tax Exemption</div>
-      <h2 class="th fu" id="tax-h">YOU'VE BEEN PAYING<br/>TAX YOU <span class="v">LEGALLY<br/>DON'T OWE.</span></h2>
-      <p style="font-size:1rem;color:var(--textm);line-height:1.75;font-weight:300;max-width:460px;margin-bottom:36px;" class="fu">Section 80IAC of the Income Tax Act grants eligible startups a 3-year tax holiday on profits. If your startup was incorporated after April 2016 and you haven't filed — you've been donating money to the government voluntarily.</p>
-      <a href="https://wa.me/917999866007" class="bc g fu" rel="noopener" target="_blank">
-        <div class="dbl-i"><span>Claim Your Tax Exemption →</span><span>Talk to Agent →</span></div>
-      </a>
-    </div>
-    <div class="fu">
-      <div class="slist" role="list" aria-label="80IAC process steps">
-        <div class="si" role="listitem"><div class="sd" aria-hidden="true"></div><div class="st"><h4>Step 1 — Eligibility Check</h4><p>GrowteX reviews your incorporation date, turnover, and business model to confirm 80IAC eligibility within 24 hours.</p></div></div>
-        <div class="si" role="listitem"><div class="sd" aria-hidden="true"></div><div class="st"><h4>Step 2 — Document Preparation</h4><p>We gather and structure your financials, board resolutions, and startup certificates in the exact format DIPP requires.</p></div></div>
-        <div class="si" role="listitem"><div class="sd" aria-hidden="true"></div><div class="st"><h4>Step 3 — Application Filing</h4><p>Our experts file your 80IAC application directly on the Startup India portal — zero back-and-forth required from you.</p></div></div>
-        <div class="si" role="listitem"><div class="sd" aria-hidden="true"></div><div class="st"><h4>Step 4 — Approval and Tax Relief</h4><p>Once approved, you stop paying income tax on profits for 3 consecutive years. Legal. Significant. Done.</p></div></div>
+<section id="tax" style="background:var(--surface-1); border-top: 1px solid var(--border-default);" aria-labelledby="tax-h">
+  <div class="container">
+    <div class="tlayout">
+      <div>
+        <div class="stag fu mono-tag">TAX_EXTRACTION.sh</div>
+        <h2 class="th fu" id="tax-h">YOU'VE BEEN PAYING<br/>TAX YOU <span style="color: var(--growth-bright);">LEGALLY<br/>DON'T OWE.</span></h2>
+        <p style="font-size:1.05rem;color:var(--text-secondary);line-height:1.7;margin-bottom:36px;" class="fu">Section 80IAC grants eligible startups a 3-year tax holiday. If you haven't filed — you're donating money to the government voluntarily. We stop that.</p>
+        <a href="https://wa.me/917999866007" class="bc g fu cta-primary" rel="noopener" target="_blank" style="background: var(--growth-bright); color: var(--surface-0);">
+          <div class="dbl-i"><span>Claim Your Tax Exemption →</span><span>Talk to Agent →</span></div>
+        </a>
       </div>
-      <div class="bignum" aria-label="3 year tax holiday">3YR</div>
+      <div class="fu">
+        <div class="uv-card" style="padding: 0; border: none; background: transparent;">
+          <div class="slist" role="list">
+            <div class="si uv-card" style="margin-bottom: 12px; border-color: rgba(255,255,255,0.05);"><div class="st"><h4>Step 1 — Eligibility</h4><p>24-hour verification of your incorporation and model.</p></div></div>
+            <div class="si uv-card" style="margin-bottom: 12px; border-color: rgba(255,255,255,0.05);"><div class="st"><h4>Step 2 — Preparation</h4><p>We structure your board resolutions and financials for DIPP.</p></div></div>
+            <div class="si uv-card" style="margin-bottom: 12px; border-color: rgba(255,255,255,0.05);"><div class="st"><h4>Step 3 — Filing</h4><p>Direct submission on the portal. Zero back-and-forth for you.</p></div></div>
+          </div>
+          <div class="bignum fu" style="color: var(--growth-bright); opacity: 0.15; font-family: 'Bebas Neue', sans-serif; font-size: 8rem; line-height: 1; margin-top: 20px;">3YR_ZERO</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BENCHMARK SECTION -->
+<section style="background: var(--surface-0); padding: 96px 0;">
+  <div class="container" style="max-width: 700px;">
+    <div class="mono-tag fu" style="margin-bottom: 24px; text-align: center;">SPEED_BENCHMARK.v3</div>
+    
+    <div class="fu" style="margin-bottom: 32px;">
+      <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+        <span class="mono-tag">TRADITIONAL_CA</span>
+        <span class="mono-tag">4 WEEKS</span>
+      </div>
+      <div style="height: 4px; background: rgba(255,255,255,0.05); border-radius: 2px;">
+        <div style="height: 100%; width: 100%; background: var(--text-muted); border-radius: 2px;"></div>
+      </div>
+    </div>
+    
+    <div class="fu" style="margin-bottom: 48px;">
+      <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+        <span class="mono-tag" style="color: var(--growth-bright);">GROWTEX_ENGINE</span>
+        <span class="mono-tag" style="color: var(--growth-bright);">72 HOURS</span>
+      </div>
+      <div style="height: 4px; background: rgba(16, 185, 129, 0.1); border-radius: 2px;">
+        <div class="benchmark-bar" style="height: 100%; width: 0%; background: var(--growth-bright); border-radius: 2px; transition: width 1.5s var(--ease-out-expo);"></div>
+      </div>
+    </div>
+    
+    <div class="fu" style="text-align: center;">
+      <p class="mono-tag" style="font-size: 14px; color: var(--growth-bright);">EXECUTION_SPEED: 9.3X_FASTER</p>
     </div>
   </div>
 </section>
 
 <!-- CTA SECTION -->
-<section id="cta" aria-labelledby="cta-h">
-  <h2 id="cta-h" class="fu">STOP LEAVING MONEY<br/>ON THE TABLE.</h2>
-  <p class="fu">Your DPIIT certificate. Your tax exemption. Your digital presence. GrowteX gets it all done — while you focus on building your company.</p>
-  <div class="cbts fu">
-    <a href="booking.html?type=demo" class="bw" aria-label="Book a Demo with GrowteX">
-      <div class="dbl-i"><span>📊 Book a Demo</span><span>📊 Schedule Now</span></div>
-    </a>
-    <a href="booking.html?type=agent" class="bw" aria-label="Talk to a GrowteX Agent" style="background:var(--venture);">
-      <div class="dbl-i"><span>💬 Talk to an Agent</span><span>💬 Connect Now</span></div>
-    </a>
-    <a href="https://wa.me/917999866007" class="bwa" rel="noopener" target="_blank" aria-label="WhatsApp GrowteX on +91 7999866007">
-      <div class="dbl-i"><span>💬 WhatsApp Us Now</span><span>💬 +91 7999866007</span></div>
-    </a>
+<section id="cta" style="padding: 120px 0; background: var(--surface-1); position: relative; overflow: hidden;">
+  <div class="orb-container" aria-hidden="true">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+  </div>
+  <div class="container" style="text-align: center;">
+    <h2 id="cta-h" class="fu" style="font-size: clamp(2.5rem, 6vw, 5.5rem);">STOP LEAVING MONEY<br/>ON THE TABLE.</h2>
+    <p class="fu" style="margin: 30px auto 48px; max-width: 500px; color: var(--text-secondary);">Your DPIIT certificate. Your tax exemption. Your digital presence. GrowteX gets it all done while you build.</p>
+    <div class="cbts fu">
+      <a href="booking.html?type=demo" class="bw cta-primary" style="background: var(--text-primary); color: var(--surface-0); height: 56px; padding: 0 40px; border-radius: 30px;">
+        <div class="dbl-i"><span>📊 Book a Demo</span><span>📊 Schedule Now</span></div>
+      </a>
+      <a href="https://wa.me/917999866007" class="bwa cta-primary" style="height: 56px; padding: 0 40px; border-radius: 30px;">
+        <div class="dbl-i"><span>💬 WhatsApp Now</span><span>💬 +91 7999866007</span></div>
+      </a>
+    </div>
   </div>
 </section>
 
 <!-- FOOTER -->
-<footer role="contentinfo">
-  <div class="fg">
-    <div>
-      <div class="flogo">GROW<span>TEX</span> VENTURES</div>
-      <p class="ftag">Where serious founders build serious companies. India's trusted startup consulting and digital growth firm.</p>
+<footer role="contentinfo" style="background: var(--surface-0); border-top: 1px solid var(--border-default); padding: 80px 0 40px;">
+  <div class="container">
+    <div class="fg">
+      <div>
+        <div class="flogo" style="margin-bottom: 20px;">GROW<span>TEX</span> VENTURES</div>
+        <p class="ftag">Where serious founders build serious companies. India's trusted startup consulting and digital growth firm.</p>
+      </div>
+      <div class="fc">
+        <h4>Govt. Services</h4>
+        <ul style="list-style: none; padding: 0;">
+          <li><a href="#govt">DPIIT Certificate</a></li>
+          <li><a href="startup-india.html">Startup India</a></li>
+          <li><a href="#tax">80IAC Tax Exemption</a></li>
+        </ul>
+      </div>
+      <div class="fc">
+        <h4>Digital Services</h4>
+        <ul style="list-style: none; padding: 0;">
+          <li><a href="#digital">Website Development</a></li>
+          <li><a href="#digital">Paid Advertising</a></li>
+          <li><a href="#digital">Branding and Logo</a></li>
+        </ul>
+      </div>
     </div>
-    <div class="fc">
-      <h4>Govt. Services</h4>
-      <ul>
-        <li><a href="#govt">DPIIT Certificate</a></li>
-        <li><a href="startup-india.html">Startup India</a></li>
-        <li><a href="#tax">80IAC Tax Exemption</a></li>
-        <li><a href="#govt">Govt. Funding Access</a></li>
-      </ul>
+    <div class="fb" style="margin-top: 60px; border-top: 1px solid var(--border-default); padding-top: 40px;">
+      <p class="mono-tag" style="font-size: 11px;">© 2025 GROWTEX VENTURES. REVENUE_ENGINE_ACTIVE.sh</p>
+      <span class="fbadge mono-tag" style="border-radius: 30px;">AUTHORITY_DRIVEN_GROWTH</span>
     </div>
-    <div class="fc">
-      <h4>Digital Services</h4>
-      <ul>
-        <li><a href="#digital">Website Development</a></li>
-        <li><a href="#digital">UI/UX Design</a></li>
-        <li><a href="#digital">Paid Advertising</a></li>
-        <li><a href="#digital">Branding and Logo</a></li>
-      </ul>
-    </div>
-    <div class="fc">
-      <h4>Growth</h4>
-      <ul>
-        <li><a href="#social">Social Media Mgmt.</a></li>
-        <li><a href="booking.html">Book a Call</a></li>
-        <li><a href="admin.html">Admin Dashboard</a></li>
-        <li><a href="https://growtex.in" rel="noopener" target="_blank">growtex.in</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="fb">
-    <p>© 2025 GrowteX Ventures. All rights reserved. growtex.in</p>
-    <span class="fbadge">Where Serious Founders Build Serious Companies</span>
   </div>
 </footer>
 
 <!-- ══ BOOKING MODAL ══ -->
 <div class="bk-overlay" id="bkOverlay" role="dialog" aria-modal="true" aria-label="Book a Discovery Call" aria-hidden="true">
-  <div class="bk-modal">
-    <button class="bk-close" id="bkClose" aria-label="Close booking modal">✕</button>
-    <div class="bk-header">
-      <div class="bk-icon" aria-hidden="true">📞</div>
-      <h3 class="bk-title">Book Your FREE Discovery Call</h3>
-      <p class="bk-subtitle">15-minute call with a GrowteX expert. No obligations. Just clarity on what your business qualifies for.</p>
+  <div class="bk-modal uv-card" style="padding: 0; border: none; overflow: hidden;">
+    <button class="bk-close" id="bkClose">✕</button>
+    <div class="bk-header" style="background: var(--venture-gold);">
+      <h3 class="bk-title">Book Discovery Call</h3>
+      <p class="bk-subtitle" style="color: var(--surface-0);">15-minute call with an expert. No obligations.</p>
     </div>
-    <form id="bookingForm" class="bk-form" novalidate>
+    <form id="bookingForm" class="bk-form" style="padding: 32px;">
       <div class="bk-row">
-        <div class="bk-field">
-          <label for="bkName">Full Name <span class="bk-req">*</span></label>
-          <input type="text" id="bkName" name="name" placeholder="e.g. Rahul Sharma" required autocomplete="name"/>
-        </div>
-        <div class="bk-field">
-          <label for="bkEmail">Email Address <span class="bk-req">*</span></label>
-          <input type="email" id="bkEmail" name="email" placeholder="you@company.com" required autocomplete="email"/>
-        </div>
+        <div class="bk-field"><label class="mono-tag">FULL_NAME</label><input type="text" id="bkName" name="name" required/></div>
+        <div class="bk-field"><label class="mono-tag">EMAIL_ADDRESS</label><input type="email" id="bkEmail" name="email" required/></div>
       </div>
       <div class="bk-row">
+        <div class="bk-field"><label class="mono-tag">WHATSAPP_NUM</label><input type="tel" id="bkPhone" name="phone" required/></div>
         <div class="bk-field">
-          <label for="bkPhone">WhatsApp Number <span class="bk-req">*</span></label>
-          <div class="bk-phone-wrap">
-            <span class="bk-prefix">+91</span>
-            <input type="tel" id="bkPhone" name="phone" placeholder="7999866007" required pattern="[0-9]{10}" maxlength="10" autocomplete="tel"/>
-          </div>
-        </div>
-        <div class="bk-field">
-          <label for="bkService">Service Interest <span class="bk-req">*</span></label>
+          <label class="mono-tag">SERVICE</label>
           <select id="bkService" name="service" required>
-            <option value="" disabled selected>Select a service…</option>
-            <option value="DPIIT Certification">DPIIT / Startup India Certificate</option>
+            <option value="DPIIT Certification">DPIIT Certification</option>
             <option value="80IAC Tax Exemption">80IAC Tax Exemption</option>
-            <option value="Website Development">Website Development</option>
-            <option value="Paid Advertising">Paid Advertising (Meta/Google)</option>
-            <option value="Social Media Management">Social Media Management</option>
-            <option value="Branding & Logo Design">Branding & Logo Design</option>
-            <option value="UI/UX Design">UI/UX Design</option>
-            <option value="Full Growth Package">Full Growth Package</option>
-            <option value="Other">Other / Not Sure</option>
+            <option value="Digital Services">Digital Growth Package</option>
           </select>
         </div>
       </div>
       <div class="bk-row">
-        <div class="bk-field">
-          <label for="bkDate">Preferred Date <span class="bk-req">*</span></label>
-          <input type="date" id="bkDate" name="date" required/>
-        </div>
-        <div class="bk-field">
-          <label for="bkTime">Preferred Time (IST) <span class="bk-req">*</span></label>
-          <select id="bkTime" name="time" required>
-            <option value="" disabled selected>Select a slot…</option>
-            <option value="09:00 AM">09:00 AM</option>
-            <option value="10:00 AM">10:00 AM</option>
-            <option value="11:00 AM">11:00 AM</option>
-            <option value="12:00 PM">12:00 PM</option>
-            <option value="01:00 PM">01:00 PM</option>
-            <option value="02:00 PM">02:00 PM</option>
-            <option value="03:00 PM">03:00 PM</option>
-            <option value="04:00 PM">04:00 PM</option>
-            <option value="05:00 PM">05:00 PM</option>
-            <option value="06:00 PM">06:00 PM</option>
-          </select>
-        </div>
+        <div class="bk-field"><label class="mono-tag">PREFER_DATE</label><input type="date" id="bkDate" name="date" required/></div>
+        <div class="bk-field"><label class="mono-tag">PREFER_TIME</label><input type="time" id="bkTime" name="time" required/></div>
       </div>
-      <div class="bk-field">
-        <label for="bkMessage">Anything else? <span class="bk-opt">(optional)</span></label>
-        <textarea id="bkMessage" name="message" rows="3" placeholder="Tell us briefly about your business or question…"></textarea>
-      </div>
-      <button type="submit" class="bk-submit" id="bkSubmit">
-        <span class="bk-submit-text">Confirm Booking →</span>
-        <span class="bk-submit-loading" style="display:none;">
-          <span class="bk-spinner"></span> Booking…
-        </span>
-      </button>
-      <p class="bk-footer-note">🔒 Your data is safe. We never share it with third parties.</p>
+      <button type="submit" class="bk-submit cta-primary" style="background: var(--venture-gold); color: var(--surface-0); border-radius: 30px;">Confirm Booking →</button>
     </form>
-    <!-- Success State -->
-    <div class="bk-success" id="bkSuccess" style="display:none;">
-      <div class="bk-success-icon">✅</div>
-      <h3>You're Booked!</h3>
-      <p>A GrowteX agent will WhatsApp you at <strong id="bkConfirmPhone"></strong> within 30 minutes to confirm your <strong id="bkConfirmDate"></strong> slot.</p>
-      <div class="bk-success-actions">
-        <a href="https://wa.me/917999866007" class="bk-wa-btn" target="_blank" rel="noopener">💬 WhatsApp Us Directly</a>
-        <button class="bk-another" onclick="resetBookingForm()">Book Another Call</button>
-      </div>
-    </div>
   </div>
 </div>
 
 <!-- ══ CHATBOT FAB ══ -->
-<button class="cfab" id="cfab" aria-label="Chat with GrowteX Agent" aria-expanded="false" style="position:fixed;">
-  <div class="fbadge2" aria-hidden="true"></div>
-  <span class="fab-icon" aria-hidden="true">💬</span>
-  Chat with our GrowteX Agent now!
+<button class="cfab cta-primary" id="cfab" style="border-radius: 30px; background: var(--text-primary); color: var(--surface-0);">
+  <span class="fab-icon">💬</span> Chat with Agent Arya
 </button>
 
-<!-- CHAT WINDOW -->
-<div class="cw" id="cw" role="dialog" aria-modal="true" aria-label="GrowteX Agent Chat">
-  <div class="ch">
-    <div class="cav" aria-hidden="true">🤖</div>
-    <div class="chi">
-      <h4>GrowteX Agent — Arya</h4>
-      <p><span class="odot" aria-hidden="true"></span>Online · Responds instantly</p>
-    </div>
-    <button class="ccl" id="ccl" aria-label="Close chat">✕</button>
-  </div>
-  <div class="msgs" id="msgs" aria-live="polite" role="log"></div>
-  <div class="qr" id="qr">
-    <button class="qrb" data-msg="What is DPIIT certification?">DPIIT Certification</button>
-    <button class="qrb" data-msg="Tell me about 80IAC tax exemption">80IAC Tax</button>
-    <button class="qrb" data-msg="What digital services do you offer?">Digital Services</button>
-    <button class="qrb" data-msg="I want to book a discovery call">Book a Call 📞</button>
-  </div>
-  <div class="cia">
-    <textarea class="cin" id="cin" placeholder="Ask anything about GrowteX…" rows="1" aria-label="Type your message"></textarea>
-    <button class="csend" id="csend" aria-label="Send message">
-      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
-    </button>
-  </div>
+<div class="cw uv-card" id="cw" style="border-radius: 20px;">
+  <div class="ch" style="background: var(--surface-1);"><h4>ARYA_AI // GROWTEX</h4><button class="ccl" id="ccl">✕</button></div>
+  <div class="msgs" id="msgs"></div>
+  <div class="cia"><textarea class="cin" id="cin" placeholder="Type here..."></textarea></div>
 </div>
 
-<!-- ══ SCRIPTS ══ -->
+<!-- ══ SCRIPTS (ASYNCHRONOUS) ══ -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r160/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/split-type"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js"></script>
+
+<script>
+/**
+ * GROWTEX VENTURES - MOTION ENGINE v2
+ * 🚀 High-performance GSAP + Three.js implementation
+ */
+
+document.addEventListener('DOMContentLoaded', () => {
+  // 1. SPLIT TEXT ANIMATION
+  const splitHeadlines = new SplitType('.headline', { types: 'words,chars' });
+  gsap.from('.headline .word', {
+    y: 100,
+    opacity: 0,
+    duration: 1,
+    stagger: 0.1,
+    ease: "power4.out",
+    delay: 0.5
+  });
+
+  // 2. THREE.JS HERO CANVAS
+  const initThree = () => {
+    const canvas = document.querySelector('#hero-canvas');
+    if(!canvas) return;
+    
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+    camera.position.z = 5;
+
+    // Growth Icosahedron (Wireframe)
+    const ico = new THREE.Mesh(
+      new THREE.IcosahedronGeometry(1.5, 1),
+      new THREE.MeshBasicMaterial({ color: 0x10B981, wireframe: true, transparent: true, opacity: 0.2 })
+    );
+    
+    // Venture Torus
+    const torus = new THREE.Mesh(
+      new THREE.TorusGeometry(1, 0.2, 16, 100),
+      new THREE.MeshStandardMaterial({ color: 0xF5C842, metalness: 0.8, roughness: 0.2 })
+    );
+
+    const particles = new THREE.Points(
+      new THREE.BufferGeometry().setAttribute('position', new THREE.BufferAttribute(new Float32Array(300 * 3).map(() => (Math.random() - 0.5) * 10), 3)),
+      new THREE.PointsMaterial({ color: 0x10B981, size: 0.02, transparent: true, opacity: 0.5 })
+    );
+
+    const group = new THREE.Group();
+    group.add(ico, torus, particles);
+    scene.add(group);
+
+    const ambient = new THREE.AmbientLight(0xffffff, 0.5);
+    const point = new THREE.PointLight(0xF5C842, 2);
+    point.position.set(2, 3, 4);
+    scene.add(ambient, point);
+
+    let mouseX = 0, mouseY = 0;
+    window.addEventListener('mousemove', (e) => {
+      mouseX = (e.clientX / window.innerWidth - 0.5) * 0.5;
+      mouseY = (e.clientY / window.innerHeight - 0.5) * -0.5;
+    });
+
+    const animate = () => {
+      requestAnimationFrame(animate);
+      group.rotation.x += (mouseY - group.rotation.x) * 0.05;
+      group.rotation.y += (mouseX - group.rotation.y) * 0.05;
+      ico.rotation.y += 0.002;
+      torus.rotation.z += 0.005;
+      renderer.render(scene, camera);
+    };
+    animate();
+
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+  };
+  initThree();
+
+  // 3. SCROLL REVEAL (GSAP)
+  gsap.registerPlugin(ScrollTrigger);
+  
+  gsap.utils.toArray('.fu').forEach(el => {
+    gsap.from(el, {
+      scrollTrigger: {
+        trigger: el,
+        start: 'top 85%',
+        toggleActions: 'play none none reverse'
+      },
+      y: 60,
+      opacity: 0,
+      duration: 1,
+      ease: 'power3.out'
+    });
+  });
+
+  // Benchmark Bar Trigger
+  gsap.to('.benchmark-bar', {
+    scrollTrigger: {
+      trigger: '.benchmark-bar',
+      start: 'top 90%'
+    },
+    width: '100%',
+    duration: 1.5,
+    ease: 'power4.out'
+  });
+
+  // 4. CUSTOM CURSOR
+  const cur = document.querySelector('#cur');
+  const curRing = document.querySelector('#cur-ring');
+  
+  window.addEventListener('mousemove', (e) => {
+    gsap.to(cur, { x: e.clientX, y: e.clientY, duration: 0 });
+    gsap.to(curRing, { x: e.clientX, y: e.clientY, duration: 0.15 });
+  });
+
+  // Button Magnetic Effect
+  document.querySelectorAll('.cta-primary').forEach(btn => {
+    btn.addEventListener('mousemove', (e) => {
+      const rect = btn.getBoundingClientRect();
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
+      gsap.to(btn, { x: x * 0.3, y: y * 0.3, duration: 0.3, ease: 'power2.out' });
+      gsap.to(curRing, { scale: 2.5, borderColor: '#F5C842', duration: 0.3 });
+    });
+    btn.addEventListener('mouseleave', () => {
+      gsap.to(btn, { x: 0, y: 0, duration: 0.5, ease: 'elastic.out(1, 0.3)' });
+      gsap.to(curRing, { scale: 1, borderColor: 'rgba(245, 200, 66, 0.3)', duration: 0.3 });
+    });
+  });
+
+  // 5. VANILLA TILT
+  if(window.innerWidth > 1024) {
+    VanillaTilt.init(document.querySelectorAll(".uv-card"), {
+      max: 10,
+      speed: 400,
+      glare: true,
+      "max-glare": 0.1
+    });
+  // 6. ROADMAP PROGRESS
+  gsap.to('#roadmap-progress', {
+    scrollTrigger: {
+      trigger: '.roadmap-grid',
+      start: 'top 40%',
+      end: 'bottom 60%',
+      scrub: 1
+    },
+    height: '100%',
+    ease: 'none'
+  });
+});
+</script>
+
 <script src="js/script.js"></script>
 <script src="js/booking.js"></script>
 

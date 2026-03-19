@@ -7,11 +7,13 @@
 <meta name="description" content="Book a free 15-minute discovery call with GrowteX Ventures. Pick your date and time, and a GrowteX agent will connect with you."/>
 <meta name="robots" content="index, follow"/>
 <link rel="canonical" href="https://growtex.in/booking"/>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="css/style.css"/>
 <link rel="stylesheet" href="css/booking-page.css"/>
 </head>
-<body>
+<body style="cursor: none; background: var(--surface-0);">
+
+<div class="noise-overlay" aria-hidden="true"></div>
 <div class="cur" id="cur"></div>
 <div class="cur-ring" id="cur-ring"></div>
 
@@ -27,178 +29,164 @@
     <li><a href="index.html#social">Social Media</a></li>
     <li><a href="index.html#tax">Tax Exemption</a></li>
   </ul>
-  <a href="javascript:void(0)" class="nav-cta" aria-label="Book a call with GrowteX" id="navBookBtn">
-    <div class="dbl-i"><span>Book a Call →</span><span>Schedule Now →</span></div>
+  <a href="index.html" class="nav-cta" aria-label="Return home">
+    <div class="dbl-i"><span>← Back Home</span><span>Return Home</span></div>
   </a>
 </nav>
 
 <!-- BOOKING PAGE -->
-<section id="booking-page">
-  <div class="bp-container">
-    <!-- LEFT: Info Panel -->
-    <div class="bp-info">
-      <div class="bp-badge" id="bookingTypeBadge">
-        <span class="bp-badge-dot"></span>
-        <span id="bookingTypeLabel">Book a Demo</span>
-      </div>
-      <h1 class="bp-title">Schedule Your<br/><span class="gold">FREE Discovery</span><br/>Call</h1>
-      <p class="bp-desc">15-minute call with a GrowteX expert. No obligations. Just clarity on what your business qualifies for — DPIIT, 80IAC, digital growth, or all three.</p>
-      
-      <div class="bp-features">
-        <div class="bp-feat">
-          <div class="bp-feat-icon">⚡</div>
-          <div>
-            <strong>Quick & Focused</strong>
-            <span>30-min slots, zero fluff</span>
-          </div>
+<main style="padding-top: 120px; padding-bottom: 80px;">
+<div class="container">
+  <section id="booking-page" class="uv-card" style="padding: 40px; border-color: var(--border-default); background: var(--surface-1);">
+    <div class="bp-container">
+      <!-- LEFT: Info Panel -->
+      <div class="bp-info">
+        <div class="bp-badge mono-tag" id="bookingTypeBadge" style="background: var(--surface-2); border-color: var(--border-default); color: var(--growth-bright);">
+          <span class="bp-badge-dot" style="background: var(--growth-bright);"></span>
+          <span id="bookingTypeLabel">BOOKING_ENGINE.v2</span>
         </div>
-        <div class="bp-feat">
-          <div class="bp-feat-icon">🎯</div>
-          <div>
-            <strong>Expert Consultation</strong>
-            <span>Talk to real specialists, not bots</span>
-          </div>
-        </div>
-        <div class="bp-feat">
-          <div class="bp-feat-icon">🔒</div>
-          <div>
-            <strong>100% Confidential</strong>
-            <span>Your data stays private</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Booking Summary (appears when slot is selected) -->
-      <div class="bp-summary" id="bookingSummary" style="display:none;">
-        <h3>📋 Your Booking</h3>
-        <div class="bp-summary-row"><span>Type</span><strong id="sumType">Demo</strong></div>
-        <div class="bp-summary-row"><span>Date</span><strong id="sumDate">—</strong></div>
-        <div class="bp-summary-row"><span>Time</span><strong id="sumTime">—</strong></div>
-        <div class="bp-summary-row"><span>Duration</span><strong>30 minutes</strong></div>
-      </div>
-    </div>
-
-    <!-- RIGHT: Booking Steps -->
-    <div class="bp-steps">
-      <!-- Step Indicator -->
-      <div class="bp-stepper">
-        <div class="bp-step active" data-step="1">
-          <div class="bp-step-num">1</div>
-          <span>Select Type</span>
-        </div>
-        <div class="bp-step-line"></div>
-        <div class="bp-step" data-step="2">
-          <div class="bp-step-num">2</div>
-          <span>Pick Date & Time</span>
-        </div>
-        <div class="bp-step-line"></div>
-        <div class="bp-step" data-step="3">
-          <div class="bp-step-num">3</div>
-          <span>Your Details</span>
-        </div>
-      </div>
-
-      <!-- STEP 1: Booking Type -->
-      <div class="bp-panel" id="step1" data-step="1">
-        <h2 class="bp-panel-title">What would you like to do?</h2>
-        <div class="bp-type-grid">
-          <button class="bp-type-card active" data-type="demo" id="typeDemo">
-            <div class="bp-type-icon">📊</div>
-            <h3>Book a Demo</h3>
-            <p>See how GrowteX can help your startup grow. We'll walk you through our services.</p>
-            <div class="bp-type-check">✓</div>
-          </button>
-          <button class="bp-type-card" data-type="agent" id="typeAgent">
-            <div class="bp-type-icon">💬</div>
-            <h3>Talk to an Agent</h3>
-            <p>Speak directly with a GrowteX expert about your specific needs right now.</p>
-            <div class="bp-type-check">✓</div>
-          </button>
-        </div>
-        <button class="bp-next-btn" id="step1Next">
-          Continue →
-        </button>
-      </div>
-
-      <!-- STEP 2: Date & Time -->
-      <div class="bp-panel" id="step2" data-step="2" style="display:none;">
-        <h2 class="bp-panel-title">Pick a date & time</h2>
+        <h1 class="bp-title" style="font-family: 'Syne', sans-serif; font-size: 3rem; margin: 20px 0;">Schedule Your<br/><span style="color: var(--venture-gold);">DISCOVERY</span><br/>Call</h1>
+        <p class="bp-desc" style="color: var(--text-secondary); margin-bottom: 40px;">15-minute call with a GrowteX expert. No obligations. Just clarity on what your business qualifies for.</p>
         
-        <!-- Calendar -->
-        <div class="bp-calendar" id="bpCalendar">
-          <div class="bp-cal-header">
-            <button class="bp-cal-nav" id="calPrev" aria-label="Previous month">‹</button>
-            <h3 id="calMonthYear"></h3>
-            <button class="bp-cal-nav" id="calNext" aria-label="Next month">›</button>
+        <div class="bp-features">
+          <div class="bp-feat fu" style="display: flex; gap: 15px; align-items: center;">
+            <div class="bp-feat-icon" style="background: var(--surface-2); color: var(--venture-gold); font-size: 20px;">⚡</div>
+            <div>
+              <strong class="mono-tag" style="color: var(--text-primary);">QUICK_FOCUSED</strong><br/>
+              <span style="font-size: 0.85rem; color: var(--text-muted);">15-min slots, zero fluff</span>
+            </div>
           </div>
-          <div class="bp-cal-weekdays">
-            <span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
+          <div class="bp-feat fu" style="display: flex; gap: 15px; align-items: center; margin-top: 20px;">
+            <div class="bp-feat-icon" style="background: var(--surface-2); color: var(--growth-bright); font-size: 20px;">🎯</div>
+            <div>
+              <strong class="mono-tag" style="color: var(--text-primary);">EXPERT_CONSULT</strong><br/>
+              <span style="font-size: 0.85rem; color: var(--text-muted);">Talk to real human specialists</span>
+            </div>
           </div>
-          <div class="bp-cal-grid" id="calGrid"></div>
         </div>
 
-        <!-- Time Slots -->
-        <div class="bp-time-section" id="timeSection" style="display:none;">
-          <h3 class="bp-time-title">Available slots for <span id="selectedDateLabel"></span></h3>
-          <div class="bp-time-grid" id="timeGrid"></div>
-          <p class="bp-time-note">⏰ All times are in IST (Asia/Kolkata) · 30-min slots</p>
-        </div>
-
-        <div class="bp-step-nav">
-          <button class="bp-back-btn" id="step2Back">← Back</button>
-          <button class="bp-next-btn" id="step2Next" disabled>Continue →</button>
+        <!-- Booking Summary -->
+        <div class="bp-summary uv-card" id="bookingSummary" style="margin-top: 40px; background: var(--surface-2); display: none; padding: 20px;">
+          <h3 class="mono-tag" style="font-size: 13px; color: var(--venture-gold); margin-bottom: 15px;">CURRENT_SELECTION</h3>
+          <div class="bp-summary-row" style="display: flex; justify-content: space-between; margin-bottom: 8px;"><span class="mono-tag" style="font-size: 11px;">TYPE</span><strong id="sumType">Demo</strong></div>
+          <div class="bp-summary-row" style="display: flex; justify-content: space-between; margin-bottom: 8px;"><span class="mono-tag" style="font-size: 11px;">DATE</span><strong id="sumDate">—</strong></div>
+          <div class="bp-summary-row" style="display: flex; justify-content: space-between;"><span class="mono-tag" style="font-size: 11px;">TIME</span><strong id="sumTime">—</strong></div>
         </div>
       </div>
 
-      <!-- STEP 3: Details Form -->
-      <div class="bp-panel" id="step3" data-step="3" style="display:none;">
-        <h2 class="bp-panel-title">Your Details</h2>
-        <form id="bpForm" novalidate>
-          <div class="bp-form-row">
-            <div class="bp-form-field">
-              <label for="bpName">Full Name <span class="req">*</span></label>
-              <input type="text" id="bpName" name="name" placeholder="e.g. Rahul Sharma" required autocomplete="name"/>
-            </div>
-            <div class="bp-form-field">
-              <label for="bpEmail">Email Address <span class="req">*</span></label>
-              <input type="email" id="bpEmail" name="email" placeholder="you@company.com" required autocomplete="email"/>
-            </div>
+      <!-- RIGHT: Booking Steps -->
+      <div class="bp-steps">
+        <div class="bp-stepper" style="display: flex; align-items: center; gap: 10px; margin-bottom: 40px;">
+          <div class="bp-step active" data-step="1">
+            <div class="bp-step-num mono-tag" style="width: 32px; height: 32px; display: grid; place-items: center; border: 1px solid var(--venture-gold); border-radius: 50%; color: var(--venture-gold); font-size: 12px;">01</div>
+            <span class="mono-tag" style="font-size: 9px; margin-top: 5px; display: block;">TYPE</span>
           </div>
-          <div class="bp-form-row">
-            <div class="bp-form-field">
-              <label for="bpPhone">WhatsApp Number <span class="req">*</span></label>
-              <div class="bp-phone-wrap">
-                <span class="bp-prefix">+91</span>
-                <input type="tel" id="bpPhone" name="phone" placeholder="7999866007" required pattern="[0-9]{10}" maxlength="10" autocomplete="tel"/>
-              </div>
-            </div>
-            <div class="bp-form-field">
-              <label for="bpCompany">Company Name</label>
-              <input type="text" id="bpCompany" name="company" placeholder="Your startup name" autocomplete="organization"/>
-            </div>
+          <div class="bp-step-line" style="flex: 1; height: 1px; background: var(--border-default);"></div>
+          <div class="bp-step" data-step="2">
+            <div class="bp-step-num mono-tag" style="width: 32px; height: 32px; display: grid; place-items: center; border: 1px solid var(--border-default); border-radius: 50%; font-size: 12px;">02</div>
+            <span class="mono-tag" style="font-size: 9px; margin-top: 5px; display: block;">TIME</span>
           </div>
-          <div class="bp-form-field">
-            <label for="bpNotes">Anything else? <span class="opt">(optional)</span></label>
-            <textarea id="bpNotes" name="notes" rows="3" placeholder="Tell us briefly about your business or question…"></textarea>
+          <div class="bp-step-line" style="flex: 1; height: 1px; background: var(--border-default);"></div>
+          <div class="bp-step" data-step="3">
+            <div class="bp-step-num mono-tag" style="width: 32px; height: 32px; display: grid; place-items: center; border: 1px solid var(--border-default); border-radius: 50%; font-size: 12px;">03</div>
+            <span class="mono-tag" style="font-size: 9px; margin-top: 5px; display: block;">DATA</span>
           </div>
+        </div>
 
-          <div class="bp-step-nav">
-            <button type="button" class="bp-back-btn" id="step3Back">← Back</button>
-            <button type="submit" class="bp-submit-btn" id="bpSubmitBtn">
-              <span class="bp-submit-text">Confirm Booking →</span>
-              <span class="bp-submit-loading" style="display:none;">
-                <span class="bp-spinner"></span> Booking…
-              </span>
+        <!-- STEP 1: Booking Type -->
+        <div class="bp-panel" id="step1" data-step="1">
+          <h2 class="bp-panel-title mono-tag" style="font-size: 14px; margin-bottom: 24px; color: var(--text-primary);">SELECT_YOUR_SERVICE_PATH</h2>
+          <div class="bp-type-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+            <button class="bp-type-card active uv-card" data-type="demo" id="typeDemo" style="text-align: left; transition: all 0.3s var(--ease-smooth); border-radius: 12px; border-width: 2px;">
+              <div class="bp-type-icon" style="font-size: 24px; margin-bottom: 15px;">📊</div>
+              <h3 style="font-family: 'Syne', sans-serif; margin-bottom: 8px;">Book a Demo</h3>
+              <p style="font-size: 13px; color: var(--text-secondary); line-height: 1.5;">See how GrowteX can help your startup grow.</p>
+            </button>
+            <button class="bp-type-card uv-card" data-type="agent" id="typeAgent" style="text-align: left; transition: all 0.3s var(--ease-smooth); border-radius: 12px; border-width: 2px;">
+              <div class="bp-type-icon" style="font-size: 24px; margin-bottom: 15px;">💬</div>
+              <h3 style="font-family: 'Syne', sans-serif; margin-bottom: 8px;">Talk to an Agent</h3>
+              <p style="font-size: 13px; color: var(--text-secondary); line-height: 1.5;">Speak directly with a GrowteX expert now.</p>
             </button>
           </div>
-          <p class="bp-privacy">🔒 Your data is safe. We never share it with third parties.</p>
-        </form>
+          <button class="bp-next-btn cta-primary" id="step1Next" style="margin-top: 30px; background: var(--text-primary); color: var(--surface-0); border-radius: 30px; height: 50px; width: 100%; border: none; font-weight: 700; cursor: pointer;">Continue →</button>
+        </div>
+
+        <!-- STEP 2: Date & Time -->
+        <div class="bp-panel" id="step2" data-step="2" style="display:none;">
+          <h2 class="bp-panel-title mono-tag" style="font-size: 14px; margin-bottom: 24px; color: var(--text-primary);">PICK_DATE_AND_TIME</h2>
+          <div class="bp-calendar uv-card" id="bpCalendar" style="padding: 20px; background: var(--surface-2);">
+            <div class="bp-cal-header" style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-default); padding-bottom: 15px;">
+              <button class="bp-cal-nav" id="calPrev" style="background: transparent; border: none; color: white; cursor: pointer; font-size: 20px;">‹</button>
+              <h3 id="calMonthYear" class="mono-tag" style="font-size: 13px;"></h3>
+              <button class="bp-cal-nav" id="calNext" style="background: transparent; border: none; color: white; cursor: pointer; font-size: 20px;">›</button>
+            </div>
+            <div class="bp-cal-grid" id="calGrid" style="margin-top: 15px; display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px;"></div>
+          </div>
+          <div class="bp-time-section" id="timeSection" style="margin-top: 30px; display:none;">
+            <div class="bp-time-grid" id="timeGrid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 10px;"></div>
+          </div>
+          <div class="bp-step-nav" style="margin-top: 30px; display: flex; gap: 12px;">
+            <button class="bp-back-btn mono-tag" id="step2Back" style="flex: 1; border: 1px solid var(--border-default); background: transparent; color: white; border-radius: 30px; height: 50px; cursor: pointer;">← BACK</button>
+            <button class="bp-next-btn cta-primary" id="step2Next" disabled style="flex: 2; background: var(--text-primary); color: var(--surface-0); border-radius: 30px; height: 50px; border: none; font-weight: 700; cursor: pointer;">CONTINUE →</button>
+          </div>
+        </div>
+
+        <!-- STEP 3: Details -->
+        <div class="bp-panel" id="step3" data-step="3" style="display:none;">
+          <h2 class="bp-panel-title mono-tag" style="font-size: 14px; margin-bottom: 24px; color: var(--text-primary);">FINALIZE_YOUR_ENTRY</h2>
+          <form id="bpForm" novalidate style="display: flex; flex-direction: column; gap: 20px;">
+            <div class="bp-form-field">
+              <label class="mono-tag" style="font-size: 10px; margin-bottom: 8px; display: block; color: var(--text-muted);">FULL_NAME</label>
+              <input type="text" id="bpName" name="name" placeholder="Rahul Sharma" required style="width: 100%; background: var(--surface-2); border: 1px solid var(--border-default); height: 50px; border-radius: 8px; padding: 0 15px; color: white;"/>
+            </div>
+            <div class="bp-form-field">
+              <label class="mono-tag" style="font-size: 10px; margin-bottom: 8px; display: block; color: var(--text-muted);">EMAIL</label>
+              <input type="email" id="bpEmail" name="email" placeholder="rahul@startup.in" required style="width: 100%; background: var(--surface-2); border: 1px solid var(--border-default); height: 50px; border-radius: 8px; padding: 0 15px; color: white;"/>
+            </div>
+            <div class="bp-form-field">
+              <label class="mono-tag" style="font-size: 10px; margin-bottom: 8px; display: block; color: var(--text-muted);">WHATSAPP_NUMBER</label>
+              <input type="tel" id="bpPhone" name="phone" placeholder="7999866007" required style="width: 100%; background: var(--surface-2); border: 1px solid var(--border-default); height: 50px; border-radius: 8px; padding: 0 15px; color: white;"/>
+            </div>
+            <div class="bp-step-nav" style="margin-top: 10px; display: flex; gap: 12px;">
+              <button type="button" class="bp-back-btn mono-tag" id="step3Back" style="flex: 1; border: 1px solid var(--border-default); background: transparent; color: white; border-radius: 30px; height: 50px; cursor: pointer;">← BACK</button>
+              <button type="submit" class="bp-submit-btn cta-primary" id="bpSubmitBtn" style="flex: 2; background: var(--venture-gold); color: var(--surface-0); border-radius: 30px; height: 50px; border: none; font-weight: 700; cursor: pointer;">CONFIRM_BOOKING →</button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
+</div>
+</main>
 
 <!-- SCRIPTS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const cur = document.querySelector('#cur');
+  const curRing = document.querySelector('#cur-ring');
+  window.addEventListener('mousemove', (e) => {
+    gsap.to(cur, { x: e.clientX, y: e.clientY, duration: 0 });
+    gsap.to(curRing, { x: e.clientX, y: e.clientY, duration: 0.15 });
+  });
+  
+  gsap.from('#booking-page', { y: 40, opacity: 0, duration: 1, ease: "power4.out", delay: 0.2 });
+  
+  document.querySelectorAll('.cta-primary').forEach(btn => {
+    btn.addEventListener('mousemove', (e) => {
+      const rect = btn.getBoundingClientRect();
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
+      gsap.to(btn, { x: x * 0.2, y: y * 0.2, duration: 0.3 });
+      gsap.to(curRing, { scale: 2, duration: 0.3 });
+    });
+    btn.addEventListener('mouseleave', () => {
+      gsap.to(btn, { x: 0, y: 0, duration: 0.5, ease: 'elastic.out(1, 0.3)' });
+      gsap.to(curRing, { scale: 1, duration: 0.3 });
+    });
+  });
+});
+</script>
 <script src="js/script.js"></script>
 <script src="js/booking-page.js"></script>
 
