@@ -14,7 +14,7 @@ const BOOKING_CONFIG = {
   maxBookingsPerSlot: 1,
   weekendsDisabled: true,    // No Sat/Sun
   maxAdvanceDays: 60,        // Can book up to 60 days ahead
-  googleSheetUrl: 'https://script.google.com/macros/s/AKfycby_Wj6gQ7BjvnOLwdD69_g3N6mAQvoF8NU0Ss0OItCxXWAZ8D8sgk67T7pLANeSxk18/exec'
+  googleSheetUrl: 'https://script.google.com/macros/s/AKfycbztccLstBlbPmgCMwHgfZhNzoAbHXkS4xDQU4KkN3-E-634f5UAc2q-EvU7a6diH-Va/exec'
 };
 
 /* ═══════════════════════════════════════════════════

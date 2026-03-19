@@ -18,7 +18,7 @@
  * 5. Deploy > New deployment > Web app > Execute as "Me" > Access "Anyone"
  * 6. Copy the web app URL and paste it below
  */
-const GOOGLE_SHEET_URL = 'https://script.google.com/macros/s/AKfycby_Wj6gQ7BjvnOLwdD69_g3N6mAQvoF8NU0Ss0OItCxXWAZ8D8sgk67T7pLANeSxk18/exec';
+const GOOGLE_SHEET_URL = 'https://script.google.com/macros/s/AKfycbztccLstBlbPmgCMwHgfZhNzoAbHXkS4xDQU4KkN3-E-634f5UAc2q-EvU7a6diH-Va/exec';
 
 /* ═══════════════════════════════════════════════════
    DOM ELEMENTS
