@@ -1,18 +1,17 @@
 /**
- * GROWTEX VENTURES - GOOGLE APPS SCRIPT v8 (Customized)
+ * GROWTEX VENTURES - GOOGLE APPS SCRIPT v9 (Pro Gmail + Meet Automation)
  * 
  * 🚀 WHAT THIS DOES:
- * 1. Saves every booking to your specific Google Sheet (ID: 1t5miC3kRW56ch...)
- * 2. Automatically sends a Google Calendar invite to the customer's email.
- * 3. Generates a unique Google Meet link.
- * 4. Saves the Meet Link into the Sheet.
- *
- * 🛠️ CONFIGURATION (Pre-filled for you):
+ * 1. Saves booking to: calender booking for growtex.in
+ * 2. Creates a Google Calendar Event + Auto Google Meet Link.
+ * 3. Sends a Personalized Gmail from s.dhami0071@gmail.com to the customer.
  */
 
 const CONFIG = {
   SHEET_ID: '1t5miC3kRW56chGpzXt_cEeSka6vQJ4Zp617dVajI9Us', 
-  SHEET_NAME: 'calender booking for growtex.in' 
+  SHEET_NAME: 'calender booking for growtex.in',
+  SENDER_NAME: 'GrowteX Ventures',
+  SENDER_EMAIL: 's.dhami0071@gmail.com' // Ensure you deploy this script using this account!
 };
 
 function doGet(e) { return handleRequest(e); }
@@ -20,11 +19,10 @@ function doPost(e) { return handleRequest(e); }
 
 function handleRequest(e) {
   try {
-    // 1. Open the specific Sheet
     var ss = SpreadsheetApp.openById(CONFIG.SHEET_ID);
     var sheet = ss.getSheetByName(CONFIG.SHEET_NAME) || ss.getSheets()[0];
 
-    // 2. Extract Data
+    // 1. Capture Data
     var name      = e.parameter.name || 'Client';
     var email     = e.parameter.email || '';
     var phone     = e.parameter.phone || '';
@@ -35,31 +33,18 @@ function handleRequest(e) {
     var slotKey   = e.parameter.slotKey || '';
     var timestamp = new Date().toLocaleString("en-IN", {timeZone: "Asia/Kolkata"});
 
-    if (!email) {
-      return response({"result": "error", "error": "No email provided"});
-    }
+    if (!email) return response({"result": "error", "error": "No email provided"});
 
-    // 3. Duplicate Check
-    if (slotKey) {
-      var vals = sheet.getDataRange().getValues();
-      for (var i = 1; i < vals.length; i++) {
-        if (vals[i][8] === slotKey) {
-          return response({"result": "error", "error": "Slot already booked"});
-        }
-      }
-    }
-
-    // 4. Calendar & Meet Automation
+    // 2. Calendar Event + Meet Link
     var meetLink = "Generating...";
     try {
-      var startIso = dateStr + "T" + timeStr + ":00+05:30";
-      var startTime = new Date(startIso);
+      var startTime = new Date(dateStr + "T" + timeStr + ":00+05:30");
       var endTime = new Date(startTime.getTime() + (30 * 60 * 1000));
 
-      var eventResource = {
+      var event = {
         summary: 'GrowteX Discovery Call: ' + name,
         location: 'Google Meet',
-        description: 'Service: ' + service + '\nPhone: ' + phone + '\nNotes: ' + message,
+        description: 'Service: ' + service + '\nClient: ' + name + '\nPhone: ' + phone,
         start: { dateTime: startTime.toISOString() },
         end: { dateTime: endTime.toISOString() },
         attendees: [{ email: email }],
@@ -71,36 +56,42 @@ function handleRequest(e) {
         }
       };
 
-      var calEvent = Calendar.Events.insert(eventResource, 'primary', { conferenceDataVersion: 1 });
-      
-      if (calEvent.conferenceData && calEvent.conferenceData.entryPoints) {
-        meetLink = calEvent.conferenceData.entryPoints[0].uri;
+      // Create Calendar Event (Sends Invite)
+      var createdEvent = Calendar.Events.insert(event, 'primary', { conferenceDataVersion: 1 });
+      if (createdEvent.conferenceData && createdEvent.conferenceData.entryPoints) {
+        meetLink = createdEvent.conferenceData.entryPoints[0].uri;
       }
-    } catch (err) {
-      console.error("Calendar Error: " + err.message);
-      meetLink = "Manual Invite Needed";
+
+      // 3. Send Personalized Gmail Confirmation
+      var emailBody = "Hi " + name + ",\n\n" +
+                      "Your GrowteX Discovery Call has been confirmed! 🚀\n\n" +
+                      "📅 Date: " + dateStr + "\n" +
+                      "⏰ Time: " + timeStr + " IST\n" +
+                      "🔗 Meeting Link: " + meetLink + "\n\n" +
+                      "An invite has also been added to your Google Calendar. We look forward to talking to you!\n\n" +
+                      "Best regards,\n" +
+                      "The GrowteX Team\n" +
+                      "www.growtex.in";
+
+      MailApp.sendEmail({
+        to: email,
+        subject: "Booking Confirmed: Discovery Call with GrowteX",
+        body: emailBody,
+        name: CONFIG.SENDER_NAME
+      });
+
+    } catch (e) {
+      console.error(e);
+      meetLink = "Manual Invitation Required";
     }
 
-    // 5. Save to Sheet
-    // Order: Name | Email | Phone | Service | Date | Time | Message | Timestamp | SlotKey | Meet Link | Status
-    sheet.appendRow([
-      name, 
-      email, 
-      phone, 
-      service, 
-      dateStr, 
-      timeStr, 
-      message, 
-      timestamp, 
-      slotKey, 
-      meetLink, 
-      'confirmed'
-    ]);
+    // 4. Save to Sheet
+    sheet.appendRow([name, email, phone, service, dateStr, timeStr, message, timestamp, slotKey, meetLink, 'confirmed']);
 
     return response({"result": "success", "meetLink": meetLink});
 
-  } catch(fErr) {
-    return response({"result": "error", "error": fErr.toString()});
+  } catch(err) {
+    return response({"result": "error", "error": err.toString()});
   }
 }
 
