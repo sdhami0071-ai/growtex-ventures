@@ -464,8 +464,9 @@ async function submitToGoogleSheets(data) {
       service: data.bookingType === 'agent' ? 'Talk to Agent' : 'Book a Demo',
       date: data.date,
       time: data.time,
-      message: `[${data.bookingType.toUpperCase()}] Company: ${data.company || 'N/A'} | Notes: ${data.notes || 'None'} | Slot: ${data.slotKey}`,
-      timestamp: data.timestamp
+      message: `[${data.bookingType.toUpperCase()}] Company: ${data.company || 'N/A'} | Notes: ${data.notes || 'None'}`,
+      timestamp: data.timestamp,
+      slotKey: data.slotKey
     };
     
     const params = new URLSearchParams(sheetData).toString();
