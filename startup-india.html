@@ -12,6 +12,10 @@
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Syne:wght@400..800&display=swap" rel="stylesheet">
 
     <style>
+        .cur{width:10px;height:10px;background:var(--venture-gold);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .3s var(--es),height .3s var(--es),background .3s;}
+        .cur-ring{width:34px;height:34px;border:1.5px solid rgba(245,200,66,0.3);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:transform .45s var(--em);}
+        body:has(a:hover) .cur,body:has(button:hover) .cur{width:20px;height:20px;background:var(--venture-gold);}
+        body { cursor: none; }
         :root {
             --venture-deep: #073D2C;
             --emerald-core: #0B6E4F;
@@ -714,6 +718,8 @@
     </style>
 </head>
 <body>
+<div class="cur" id="cur"></div>
+<div class="cur-ring" id="cur-ring"></div>
 
     <!-- NAV -->
     <nav>
@@ -1222,5 +1228,6 @@
             }, stepTime);
         }
     </script>
+    <script src="js/script.js"></script>
 </body>
 </html>
