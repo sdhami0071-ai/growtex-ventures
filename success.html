@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Booking Confirmed — GrowteX Ventures</title>
+<meta name="description" content="Your booking with GrowteX Ventures is confirmed. A GrowteX agent will contact you shortly."/>
+<meta name="robots" content="noindex, nofollow"/>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="css/style.css"/>
+<link rel="stylesheet" href="css/booking-page.css"/>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="mainnav" class="sc" role="navigation" aria-label="Main navigation">
+  <div style="display: flex; align-items: center; gap: 10px;">
+    <img src="assets/logo.png" alt="GrowteX Logo" style="height: 48px; width: auto; object-fit: contain; pointer-events: none;"/>
+    <a href="index.html" class="logo" aria-label="GrowteX Ventures Home">GROW<span>TEX</span></a>
+  </div>
+  <ul class="nav-links">
+    <li><a href="index.html#govt">Govt. Services</a></li>
+    <li><a href="index.html#digital">Digital</a></li>
+    <li><a href="index.html#social">Social Media</a></li>
+    <li><a href="index.html#tax">Tax Exemption</a></li>
+  </ul>
+  <a href="booking.html" class="nav-cta" aria-label="Book a call with GrowteX">
+    <div class="dbl-i"><span>Book Again →</span><span>New Booking →</span></div>
+  </a>
+</nav>
+
+<!-- SUCCESS PAGE -->
+<section id="success-page">
+  <div class="success-container">
+    <!-- Animated Check -->
+    <div class="success-checkmark">
+      <svg class="checkmark-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+        <circle class="checkmark-circle" cx="26" cy="26" r="25" fill="none"/>
+        <path class="checkmark-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+      </svg>
+    </div>
+
+    <h1 class="success-title">You're Booked!</h1>
+    <p class="success-subtitle">Your discovery call has been confirmed.</p>
+
+    <!-- Booking Details Card -->
+    <div class="success-card" id="successCard">
+      <div class="success-card-header">
+        <span class="success-type-badge" id="successType">Demo Call</span>
+      </div>
+      <div class="success-card-body">
+        <div class="success-detail">
+          <span class="success-detail-icon">📅</span>
+          <div>
+            <div class="success-detail-label">Date</div>
+            <div class="success-detail-value" id="successDate">—</div>
+          </div>
+        </div>
+        <div class="success-detail">
+          <span class="success-detail-icon">⏰</span>
+          <div>
+            <div class="success-detail-label">Time (IST)</div>
+            <div class="success-detail-value" id="successTime">—</div>
+          </div>
+        </div>
+        <div class="success-detail">
+          <span class="success-detail-icon">👤</span>
+          <div>
+            <div class="success-detail-label">Name</div>
+            <div class="success-detail-value" id="successName">—</div>
+          </div>
+        </div>
+        <div class="success-detail">
+          <span class="success-detail-icon">📱</span>
+          <div>
+            <div class="success-detail-label">WhatsApp</div>
+            <div class="success-detail-value" id="successPhone">—</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p class="success-next">A GrowteX agent will <strong>WhatsApp you within 30 minutes</strong> to confirm your slot.</p>
+
+    <div class="success-actions">
+      <a href="https://wa.me/917999866007" class="success-wa-btn" target="_blank" rel="noopener">
+        💬 WhatsApp Us Directly
+      </a>
+      <a href="index.html" class="success-home-btn">← Back to Homepage</a>
+      <a href="booking.html" class="success-another-btn">Book Another Call</a>
+    </div>
+
+    <!-- Confetti canvas -->
+    <canvas id="confettiCanvas"></canvas>
+  </div>
+</section>
+
+<!-- SCRIPTS -->
+<script src="js/script.js"></script>
+<script>
+  // Read booking data from sessionStorage
+  document.addEventListener('DOMContentLoaded', function() {
+    const data = JSON.parse(sessionStorage.getItem('growtexBooking') || '{}');
+    
+    if (data.name) {
+      document.getElementById('successName').textContent = data.name;
+      document.getElementById('successPhone').textContent = '+91 ' + data.phone;
+      document.getElementById('successType').textContent = 
+        data.bookingType === 'agent' ? '💬 Agent Call' : '📊 Demo Call';
+      
+      // Format date
+      if (data.date) {
+        const dateObj = new Date(data.date + 'T00:00:00');
+        document.getElementById('successDate').textContent = dateObj.toLocaleDateString('en-IN', {
+          weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'
+        });
+      }
+      
+      document.getElementById('successTime').textContent = data.time || '—';
+    }
+
+    // Confetti animation
+    launchConfetti();
+  });
+
+  function launchConfetti() {
+    const canvas = document.getElementById('confettiCanvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const colors = ['#F5C842', '#d4960a', '#f5f0e8', '#0891b2', '#7c3aed', '#25D366'];
+    const particles = [];
+
+    for (let i = 0; i < 120; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height - canvas.height,
+        w: Math.random() * 10 + 4,
+        h: Math.random() * 6 + 2,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        vy: Math.random() * 3 + 2,
+        vx: (Math.random() - 0.5) * 2,
+        rot: Math.random() * 360,
+        rotSpeed: (Math.random() - 0.5) * 8,
+        opacity: 1
+      });
+    }
+
+    let frame = 0;
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      frame++;
+
+      particles.forEach(p => {
+        p.y += p.vy;
+        p.x += p.vx;
+        p.rot += p.rotSpeed;
+        if (frame > 120) p.opacity -= 0.008;
+
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.rotate(p.rot * Math.PI / 180);
+        ctx.globalAlpha = Math.max(0, p.opacity);
+        ctx.fillStyle = p.color;
+        ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+        ctx.restore();
+      });
+
+      if (frame < 250) requestAnimationFrame(animate);
+      else {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        canvas.style.display = 'none';
+      }
+    }
+    animate();
+  }
+</script>
+
+</body>
+</html>

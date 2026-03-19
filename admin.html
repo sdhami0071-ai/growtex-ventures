@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Admin — GrowteX Ventures</title>
+<meta name="robots" content="noindex, nofollow"/>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="css/style.css"/>
+<link rel="stylesheet" href="css/admin.css"/>
+</head>
+<body>
+
+<!-- LOGIN SCREEN -->
+<div id="loginScreen" class="admin-login">
+  <div class="login-card">
+    <div class="login-logo">GROW<span>TEX</span></div>
+    <h1>Admin Dashboard</h1>
+    <p>Sign in to manage bookings</p>
+    <form id="loginForm" novalidate>
+      <div class="login-field">
+        <label for="adminEmail">Email</label>
+        <input type="email" id="adminEmail" placeholder="admin@growtex.in" required autocomplete="email"/>
+      </div>
+      <div class="login-field">
+        <label for="adminPass">Password</label>
+        <input type="password" id="adminPass" placeholder="••••••••" required autocomplete="current-password"/>
+      </div>
+      <div class="login-error" id="loginError" style="display:none;">Invalid credentials. Try again.</div>
+      <button type="submit" class="login-btn" id="loginBtn">Sign In →</button>
+    </form>
+    <p class="login-note">Default: admin@growtex.in / growtex2025</p>
+  </div>
+</div>
+
+<!-- DASHBOARD -->
+<div id="dashboardScreen" class="admin-dashboard" style="display:none;">
+  <!-- Top Bar -->
+  <header class="dash-header">
+    <div class="dash-header-left">
+      <div class="dash-logo">GROW<span>TEX</span> <em>Admin</em></div>
+    </div>
+    <div class="dash-header-right">
+      <span class="dash-user" id="dashUser">admin@growtex.in</span>
+      <button class="dash-logout" id="logoutBtn">Logout</button>
+    </div>
+  </header>
+
+  <div class="dash-body">
+    <!-- Stats Cards -->
+    <div class="dash-stats" id="dashStats">
+      <div class="dash-stat-card">
+        <div class="dash-stat-icon">📊</div>
+        <div class="dash-stat-num" id="statTotal">0</div>
+        <div class="dash-stat-label">Total Bookings</div>
+      </div>
+      <div class="dash-stat-card today">
+        <div class="dash-stat-icon">📅</div>
+        <div class="dash-stat-num" id="statToday">0</div>
+        <div class="dash-stat-label">Today</div>
+      </div>
+      <div class="dash-stat-card demo">
+        <div class="dash-stat-icon">🎯</div>
+        <div class="dash-stat-num" id="statDemo">0</div>
+        <div class="dash-stat-label">Demo Bookings</div>
+      </div>
+      <div class="dash-stat-card agent">
+        <div class="dash-stat-icon">💬</div>
+        <div class="dash-stat-num" id="statAgent">0</div>
+        <div class="dash-stat-label">Agent Bookings</div>
+      </div>
+      <div class="dash-stat-card pending">
+        <div class="dash-stat-icon">⏳</div>
+        <div class="dash-stat-num" id="statPending">0</div>
+        <div class="dash-stat-label">Pending</div>
+      </div>
+      <div class="dash-stat-card completed">
+        <div class="dash-stat-icon">✅</div>
+        <div class="dash-stat-num" id="statCompleted">0</div>
+        <div class="dash-stat-label">Completed</div>
+      </div>
+    </div>
+
+    <!-- Filters -->
+    <div class="dash-filters">
+      <h2>Bookings</h2>
+      <div class="dash-filter-row">
+        <input type="text" class="dash-search" id="searchInput" placeholder="Search by name or email…"/>
+        <select class="dash-filter-select" id="filterType">
+          <option value="all">All Types</option>
+          <option value="demo">Demo</option>
+          <option value="agent">Agent</option>
+        </select>
+        <select class="dash-filter-select" id="filterStatus">
+          <option value="all">All Status</option>
+          <option value="pending">Pending</option>
+          <option value="completed">Completed</option>
+          <option value="cancelled">Cancelled</option>
+        </select>
+        <input type="date" class="dash-filter-date" id="filterDate"/>
+        <button class="dash-refresh-btn" id="refreshBtn">🔄 Refresh</button>
+      </div>
+    </div>
+
+    <!-- Table -->
+    <div class="dash-table-wrap">
+      <table class="dash-table" id="bookingsTable">
+        <thead>
+          <tr>
+            <th>Type</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Company</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Status</th>
+            <th>Notes</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="bookingsBody">
+          <tr class="dash-empty-row">
+            <td colspan="10">
+              <div class="dash-empty">
+                <span>📭</span>
+                <p>No bookings yet. They'll appear here automatically.</p>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="dash-footer">
+      <p>Bookings are stored in localStorage and synced to Google Sheets. For production, connect to MongoDB backend.</p>
+    </div>
+  </div>
+</div>
+
+<script src="js/admin.js"></script>
+
+</body>
+</html>

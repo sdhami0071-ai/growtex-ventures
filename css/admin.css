@@ -1,0 +1,462 @@
+/* ══════════════════════════════════════════════════════════════
+   GROWTEX VENTURES — ADMIN DASHBOARD STYLES
+   ══════════════════════════════════════════════════════════════ */
+
+/* ══ LOGIN ══ */
+.admin-login {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg);
+  position: relative;
+  overflow: hidden;
+}
+.admin-login::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(245,240,232,.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(245,240,232,.02) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+}
+
+.login-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 48px 44px;
+  width: 100%;
+  max-width: 420px;
+  position: relative;
+  z-index: 1;
+  box-shadow: 0 20px 60px rgba(0,0,0,.4);
+  animation: fadeUp .6s var(--ee);
+}
+.login-logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2.2rem;
+  letter-spacing: 3px;
+  color: var(--text);
+  text-align: center;
+  margin-bottom: 8px;
+}
+.login-logo span { color: var(--goldb); }
+
+.login-card h1 {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--text);
+  text-align: center;
+  margin-bottom: 4px;
+}
+.login-card > p {
+  font-size: .85rem;
+  color: var(--textm);
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.login-field {
+  margin-bottom: 18px;
+}
+.login-field label {
+  display: block;
+  font-family: 'Syne', sans-serif;
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--textm);
+  margin-bottom: 6px;
+}
+.login-field input {
+  width: 100%;
+  background: var(--bg);
+  border: 1.5px solid var(--border);
+  border-radius: 3px;
+  padding: 14px 16px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: .9rem;
+  color: var(--text);
+  outline: none;
+  transition: border-color .2s, box-shadow .2s;
+}
+.login-field input:focus {
+  border-color: var(--goldb);
+  box-shadow: 0 0 0 3px rgba(212,150,10,.1);
+}
+.login-field input::placeholder { color: var(--texts); }
+
+.login-error {
+  background: rgba(239,68,68,.1);
+  border: 1px solid rgba(239,68,68,.3);
+  color: #ef4444;
+  padding: 10px 16px;
+  border-radius: 3px;
+  font-size: .82rem;
+  margin-bottom: 18px;
+  text-align: center;
+}
+
+.login-btn {
+  width: 100%;
+  padding: 16px;
+  background: var(--venture);
+  color: var(--bg);
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: .88rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background .2s, box-shadow .2s, transform .2s var(--es);
+}
+.login-btn:hover {
+  background: var(--emerald);
+  box-shadow: 0 8px 28px rgba(0,0,0,.25);
+  transform: translateY(-1px);
+}
+
+.login-note {
+  margin-top: 20px;
+  font-size: .72rem;
+  color: var(--texts);
+  text-align: center;
+}
+
+/* ══ DASHBOARD ══ */
+.admin-dashboard {
+  min-height: 100vh;
+  background: var(--bg);
+  cursor: default;
+}
+
+/* Header */
+.dash-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 32px;
+  background: rgba(10,10,10,.95);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+}
+.dash-logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.6rem;
+  letter-spacing: 2px;
+  color: var(--text);
+}
+.dash-logo span { color: var(--goldb); }
+.dash-logo em {
+  font-style: normal;
+  font-family: 'DM Sans', sans-serif;
+  font-size: .72rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--texts);
+  margin-left: 8px;
+}
+
+.dash-header-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.dash-user {
+  font-size: .82rem;
+  color: var(--textm);
+}
+.dash-logout {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--textm);
+  padding: 8px 18px;
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: .72rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: all .2s;
+}
+.dash-logout:hover {
+  border-color: #ef4444;
+  color: #ef4444;
+}
+
+/* Body */
+.dash-body {
+  padding: 32px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* Stats */
+.dash-stats {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 12px;
+  margin-bottom: 32px;
+}
+.dash-stat-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--border);
+  border-radius: 4px;
+  padding: 20px;
+  transition: transform .3s var(--es), border-color .3s;
+}
+.dash-stat-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--borderh);
+}
+.dash-stat-card.today { border-top-color: var(--goldb); }
+.dash-stat-card.demo { border-top-color: var(--cyan); }
+.dash-stat-card.agent { border-top-color: var(--violet); }
+.dash-stat-card.pending { border-top-color: #f59e0b; }
+.dash-stat-card.completed { border-top-color: #4ade80; }
+
+.dash-stat-icon {
+  font-size: 1.4rem;
+  margin-bottom: 8px;
+}
+.dash-stat-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2.4rem;
+  color: var(--text);
+  letter-spacing: 2px;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.dash-stat-label {
+  font-size: .68rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--texts);
+}
+
+/* Filters */
+.dash-filters {
+  margin-bottom: 20px;
+}
+.dash-filters h2 {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: 16px;
+}
+.dash-filter-row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.dash-search {
+  flex: 1;
+  min-width: 200px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 10px 16px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: .85rem;
+  color: var(--text);
+  outline: none;
+  transition: border-color .2s;
+}
+.dash-search:focus { border-color: var(--goldb); }
+.dash-search::placeholder { color: var(--texts); }
+
+.dash-filter-select,
+.dash-filter-date {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 10px 14px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: .82rem;
+  color: var(--text);
+  outline: none;
+  cursor: pointer;
+}
+.dash-filter-select:focus,
+.dash-filter-date:focus { border-color: var(--goldb); }
+
+.dash-refresh-btn {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--textm);
+  padding: 10px 20px;
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: .72rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: all .2s;
+}
+.dash-refresh-btn:hover {
+  border-color: var(--goldb);
+  color: var(--goldb);
+}
+
+/* Table */
+.dash-table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  margin-bottom: 20px;
+}
+.dash-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: .82rem;
+}
+.dash-table th {
+  background: var(--surface);
+  padding: 14px 16px;
+  text-align: left;
+  font-family: 'Syne', sans-serif;
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--texts);
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+.dash-table td {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+  vertical-align: middle;
+}
+.dash-table tr:hover td {
+  background: rgba(245,240,232,.02);
+}
+.dash-table tr:last-child td { border-bottom: none; }
+
+/* Status badges */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border-radius: 2px;
+  font-size: .7rem;
+  font-weight: 600;
+  letter-spacing: .5px;
+  text-transform: uppercase;
+}
+.status-badge.pending {
+  background: rgba(245,158,11,.1);
+  border: 1px solid rgba(245,158,11,.3);
+  color: #f59e0b;
+}
+.status-badge.completed {
+  background: rgba(74,222,128,.1);
+  border: 1px solid rgba(74,222,128,.3);
+  color: #4ade80;
+}
+.status-badge.cancelled {
+  background: rgba(239,68,68,.1);
+  border: 1px solid rgba(239,68,68,.3);
+  color: #ef4444;
+}
+
+/* Type badges */
+.type-badge {
+  display: inline-flex;
+  padding: 3px 8px;
+  border-radius: 2px;
+  font-size: .68rem;
+  font-weight: 600;
+  letter-spacing: .5px;
+  text-transform: uppercase;
+}
+.type-badge.demo {
+  background: rgba(8,145,178,.1);
+  border: 1px solid rgba(8,145,178,.3);
+  color: var(--cyan);
+}
+.type-badge.agent {
+  background: rgba(124,58,237,.1);
+  border: 1px solid rgba(124,58,237,.3);
+  color: var(--violet);
+}
+
+/* Action buttons */
+.dash-action-btn {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--textm);
+  padding: 5px 10px;
+  font-size: .7rem;
+  font-weight: 600;
+  border-radius: 2px;
+  cursor: pointer;
+  margin-right: 4px;
+  transition: all .2s;
+}
+.dash-action-btn.complete:hover {
+  border-color: #4ade80;
+  color: #4ade80;
+}
+.dash-action-btn.cancel:hover {
+  border-color: #f59e0b;
+  color: #f59e0b;
+}
+.dash-action-btn.delete:hover {
+  border-color: #ef4444;
+  color: #ef4444;
+}
+
+.dash-empty {
+  text-align: center;
+  padding: 48px 20px;
+}
+.dash-empty span {
+  font-size: 2.5rem;
+  display: block;
+  margin-bottom: 12px;
+}
+.dash-empty p {
+  font-size: .88rem;
+  color: var(--texts);
+}
+
+.dash-footer {
+  text-align: center;
+  padding: 20px 0;
+}
+.dash-footer p {
+  font-size: .72rem;
+  color: var(--texts);
+}
+
+/* ══ RESPONSIVE ══ */
+@media (max-width: 1100px) {
+  .dash-stats { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 768px) {
+  .dash-header { padding: 14px 16px; }
+  .dash-body { padding: 16px; }
+  .dash-stats { grid-template-columns: repeat(2, 1fr); }
+  .dash-filter-row { flex-direction: column; }
+  .dash-search { min-width: unset; width: 100%; }
+  .login-card { padding: 36px 28px; margin: 20px; }
+}

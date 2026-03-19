@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Book a Call — GrowteX Ventures</title>
+<meta name="description" content="Book a free 15-minute discovery call with GrowteX Ventures. Pick your date and time, and a GrowteX agent will connect with you."/>
+<meta name="robots" content="index, follow"/>
+<link rel="canonical" href="https://growtex.in/booking"/>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="css/style.css"/>
+<link rel="stylesheet" href="css/booking-page.css"/>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="mainnav" role="navigation" aria-label="Main navigation">
+  <div style="display: flex; align-items: center; gap: 10px;">
+    <img src="assets/logo.png" alt="GrowteX Logo" style="height: 48px; width: auto; object-fit: contain; pointer-events: none;"/>
+    <a href="index.html" class="logo" aria-label="GrowteX Ventures Home">GROW<span>TEX</span></a>
+  </div>
+  <ul class="nav-links">
+    <li><a href="index.html#govt">Govt. Services</a></li>
+    <li><a href="index.html#digital">Digital</a></li>
+    <li><a href="index.html#social">Social Media</a></li>
+    <li><a href="index.html#tax">Tax Exemption</a></li>
+  </ul>
+  <a href="javascript:void(0)" class="nav-cta" aria-label="Book a call with GrowteX" id="navBookBtn">
+    <div class="dbl-i"><span>Book a Call →</span><span>Schedule Now →</span></div>
+  </a>
+</nav>
+
+<!-- BOOKING PAGE -->
+<section id="booking-page">
+  <div class="bp-container">
+    <!-- LEFT: Info Panel -->
+    <div class="bp-info">
+      <div class="bp-badge" id="bookingTypeBadge">
+        <span class="bp-badge-dot"></span>
+        <span id="bookingTypeLabel">Book a Demo</span>
+      </div>
+      <h1 class="bp-title">Schedule Your<br/><span class="gold">FREE Discovery</span><br/>Call</h1>
+      <p class="bp-desc">15-minute call with a GrowteX expert. No obligations. Just clarity on what your business qualifies for — DPIIT, 80IAC, digital growth, or all three.</p>
+      
+      <div class="bp-features">
+        <div class="bp-feat">
+          <div class="bp-feat-icon">⚡</div>
+          <div>
+            <strong>Quick & Focused</strong>
+            <span>30-min slots, zero fluff</span>
+          </div>
+        </div>
+        <div class="bp-feat">
+          <div class="bp-feat-icon">🎯</div>
+          <div>
+            <strong>Expert Consultation</strong>
+            <span>Talk to real specialists, not bots</span>
+          </div>
+        </div>
+        <div class="bp-feat">
+          <div class="bp-feat-icon">🔒</div>
+          <div>
+            <strong>100% Confidential</strong>
+            <span>Your data stays private</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Booking Summary (appears when slot is selected) -->
+      <div class="bp-summary" id="bookingSummary" style="display:none;">
+        <h3>📋 Your Booking</h3>
+        <div class="bp-summary-row"><span>Type</span><strong id="sumType">Demo</strong></div>
+        <div class="bp-summary-row"><span>Date</span><strong id="sumDate">—</strong></div>
+        <div class="bp-summary-row"><span>Time</span><strong id="sumTime">—</strong></div>
+        <div class="bp-summary-row"><span>Duration</span><strong>30 minutes</strong></div>
+      </div>
+    </div>
+
+    <!-- RIGHT: Booking Steps -->
+    <div class="bp-steps">
+      <!-- Step Indicator -->
+      <div class="bp-stepper">
+        <div class="bp-step active" data-step="1">
+          <div class="bp-step-num">1</div>
+          <span>Select Type</span>
+        </div>
+        <div class="bp-step-line"></div>
+        <div class="bp-step" data-step="2">
+          <div class="bp-step-num">2</div>
+          <span>Pick Date & Time</span>
+        </div>
+        <div class="bp-step-line"></div>
+        <div class="bp-step" data-step="3">
+          <div class="bp-step-num">3</div>
+          <span>Your Details</span>
+        </div>
+      </div>
+
+      <!-- STEP 1: Booking Type -->
+      <div class="bp-panel" id="step1" data-step="1">
+        <h2 class="bp-panel-title">What would you like to do?</h2>
+        <div class="bp-type-grid">
+          <button class="bp-type-card active" data-type="demo" id="typeDemo">
+            <div class="bp-type-icon">📊</div>
+            <h3>Book a Demo</h3>
+            <p>See how GrowteX can help your startup grow. We'll walk you through our services.</p>
+            <div class="bp-type-check">✓</div>
+          </button>
+          <button class="bp-type-card" data-type="agent" id="typeAgent">
+            <div class="bp-type-icon">💬</div>
+            <h3>Talk to an Agent</h3>
+            <p>Speak directly with a GrowteX expert about your specific needs right now.</p>
+            <div class="bp-type-check">✓</div>
+          </button>
+        </div>
+        <button class="bp-next-btn" id="step1Next">
+          Continue →
+        </button>
+      </div>
+
+      <!-- STEP 2: Date & Time -->
+      <div class="bp-panel" id="step2" data-step="2" style="display:none;">
+        <h2 class="bp-panel-title">Pick a date & time</h2>
+        
+        <!-- Calendar -->
+        <div class="bp-calendar" id="bpCalendar">
+          <div class="bp-cal-header">
+            <button class="bp-cal-nav" id="calPrev" aria-label="Previous month">‹</button>
+            <h3 id="calMonthYear"></h3>
+            <button class="bp-cal-nav" id="calNext" aria-label="Next month">›</button>
+          </div>
+          <div class="bp-cal-weekdays">
+            <span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
+          </div>
+          <div class="bp-cal-grid" id="calGrid"></div>
+        </div>
+
+        <!-- Time Slots -->
+        <div class="bp-time-section" id="timeSection" style="display:none;">
+          <h3 class="bp-time-title">Available slots for <span id="selectedDateLabel"></span></h3>
+          <div class="bp-time-grid" id="timeGrid"></div>
+          <p class="bp-time-note">⏰ All times are in IST (Asia/Kolkata) · 30-min slots</p>
+        </div>
+
+        <div class="bp-step-nav">
+          <button class="bp-back-btn" id="step2Back">← Back</button>
+          <button class="bp-next-btn" id="step2Next" disabled>Continue →</button>
+        </div>
+      </div>
+
+      <!-- STEP 3: Details Form -->
+      <div class="bp-panel" id="step3" data-step="3" style="display:none;">
+        <h2 class="bp-panel-title">Your Details</h2>
+        <form id="bpForm" novalidate>
+          <div class="bp-form-row">
+            <div class="bp-form-field">
+              <label for="bpName">Full Name <span class="req">*</span></label>
+              <input type="text" id="bpName" name="name" placeholder="e.g. Rahul Sharma" required autocomplete="name"/>
+            </div>
+            <div class="bp-form-field">
+              <label for="bpEmail">Email Address <span class="req">*</span></label>
+              <input type="email" id="bpEmail" name="email" placeholder="you@company.com" required autocomplete="email"/>
+            </div>
+          </div>
+          <div class="bp-form-row">
+            <div class="bp-form-field">
+              <label for="bpPhone">WhatsApp Number <span class="req">*</span></label>
+              <div class="bp-phone-wrap">
+                <span class="bp-prefix">+91</span>
+                <input type="tel" id="bpPhone" name="phone" placeholder="7999866007" required pattern="[0-9]{10}" maxlength="10" autocomplete="tel"/>
+              </div>
+            </div>
+            <div class="bp-form-field">
+              <label for="bpCompany">Company Name</label>
+              <input type="text" id="bpCompany" name="company" placeholder="Your startup name" autocomplete="organization"/>
+            </div>
+          </div>
+          <div class="bp-form-field">
+            <label for="bpNotes">Anything else? <span class="opt">(optional)</span></label>
+            <textarea id="bpNotes" name="notes" rows="3" placeholder="Tell us briefly about your business or question…"></textarea>
+          </div>
+
+          <div class="bp-step-nav">
+            <button type="button" class="bp-back-btn" id="step3Back">← Back</button>
+            <button type="submit" class="bp-submit-btn" id="bpSubmitBtn">
+              <span class="bp-submit-text">Confirm Booking →</span>
+              <span class="bp-submit-loading" style="display:none;">
+                <span class="bp-spinner"></span> Booking…
+              </span>
+            </button>
+          </div>
+          <p class="bp-privacy">🔒 Your data is safe. We never share it with third parties.</p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SCRIPTS -->
+<script src="js/script.js"></script>
+<script src="js/booking-page.js"></script>
+
+</body>
+</html>
