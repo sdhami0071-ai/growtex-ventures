@@ -330,4 +330,124 @@ footer{background:#050505;padding:60px 6vw 30px;border-top:1px solid rgba(245,24
 /* ══ .bw BUTTON FIX (button vs anchor) ══ */
 button.bw{border:none;cursor:pointer;}
 
+/* ══ MILLION DOLLAR ROADMAP (Hormozi Style) ══ */
+.roadmap-section {
+  padding: 120px 6vw;
+  background: var(--bg);
+  text-align: left;
+}
+.roadmap-header {
+  margin-bottom: 80px;
+}
+.roadmap-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+  position: relative;
+}
+.roadmap-path {
+  position: absolute;
+  top: 36px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--goldb) 0%, var(--violet) 50%, var(--cyan) 100%);
+  opacity: .15;
+  z-index: 0;
+}
+.roadmap-item {
+  position: relative;
+  z-index: 1;
+}
+.roadmap-icon {
+  width: 72px;
+  height: 72px;
+  background: var(--surface);
+  border: 2px solid var(--border);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  margin-bottom: 24px;
+  transition: all .4s var(--es);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+.roadmap-item:hover .roadmap-icon {
+  transform: translateY(-5px) scale(1.05);
+  border-color: var(--goldb);
+  box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+}
+.step-label {
+  display: block;
+  font-family: 'Syne', sans-serif;
+  font-size: .62rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--goldb);
+  margin-bottom: 12px;
+}
+.roadmap-content h3 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2.2rem;
+  letter-spacing: 1px;
+  line-height: .95;
+  color: var(--text);
+  margin-bottom: 16px;
+}
+.roadmap-content p {
+  font-size: .88rem;
+  color: var(--textm);
+  line-height: 1.6;
+  margin-bottom: 24px;
+  font-weight: 300;
+}
+.roadmap-content p strong {
+  color: var(--text);
+  font-weight: 600;
+}
+.roadmap-stats {
+  list-style: none;
+  display: flex;
+  gap: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+}
+.roadmap-stats li {
+  font-size: .7rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--textm);
+}
+.roadmap-stats li strong {
+  display: block;
+  font-size: 1.2rem;
+  color: var(--goldb);
+  font-family: 'Bebas Neue', sans-serif;
+}
+.roadmap-cta {
+  margin-top: 80px;
+  padding: 60px;
+  background: var(--surfacealt);
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  text-align: center;
+}
+.roadmap-cta p {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--text);
+  font-style: italic;
+  margin-bottom: 32px;
+}
+
+@media(max-width:900px){
+  .roadmap-container { grid-template-columns: 1fr; gap: 60px; }
+  .roadmap-path { display: none; }
+  .roadmap-cta { padding: 40px 20px; }
+}
+
 @media(max-width:900px){.grid2,.grid3,.slayout,.tlayout,.fg{grid-template-columns:1fr;}.stats{gap:1.5rem;}nav{padding:16px 4vw;}.nav-links{display:none;}#dbanner{flex-direction:column;}.cw{width:calc(100vw - 2rem);right:1rem;bottom:5.5rem;}.cfab{right:1rem;bottom:1rem;}.bk-modal{max-width:100%;}.bk-row{grid-template-columns:1fr;}.bk-header{padding:28px 24px 22px;}.bk-form{padding:22px 24px 28px;}.bk-title{font-size:1.6rem;}.bk-success{padding:36px 24px;}}
