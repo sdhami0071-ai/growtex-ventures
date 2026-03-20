@@ -88,7 +88,7 @@
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
-body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-weight:400;line-height:1.65;overflow-x:hidden;cursor:none;}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-weight:400;line-height:1.65;overflow-x:hidden;}
 
 /* ══ NAV ARCHITECTURE ══ */
 nav {
@@ -329,7 +329,7 @@ footer{background:#050505;padding:60px 6vw 30px;border-top:1px solid rgba(245,24
 .fbadge{font-size:.7rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:6px 14px;background:rgba(212,150,10,.08);border:1px solid rgba(212,150,10,.2);color:var(--goldb);border-radius:2px;}
 
 /* ══ SCROLL REVEAL ══ */
-.fu{opacity:0;transform:translateY(32px);transition:opacity .7s var(--ee),transform .7s var(--ee);}
+.fu{transition:opacity .7s var(--ee),transform .7s var(--ee);}
 .fu.v{opacity:1;transform:translateY(0);}
 
 /* ══ CHATBOT ══ */
